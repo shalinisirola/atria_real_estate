@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin console — Atria</title>
+<meta name="description" content="Admin console">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+
+<main id="main">
+<style>
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-5)}
+@media(max-width:1100px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tiles{grid-template-columns:1fr}}
+.tile{border:1px solid var(--hairline);background:var(--white);padding:var(--s-5)}
+.tile__k{font-family:var(--display);font-size:2rem;font-weight:300;letter-spacing:-.03em;line-height:1.1}
+.delta{font-family:var(--data);font-size:var(--t-mic);letter-spacing:.06em}
+.delta--up{color:var(--green)} .delta--down{color:var(--red)}
+.pane-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-5);flex-wrap:wrap;
+  padding-bottom:var(--s-5);border-bottom:1px solid var(--hairline)}
+.panel{border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)}
+.spark{width:100%;height:auto}
+.q-row{display:grid;grid-template-columns:96px 1fr auto;gap:var(--s-5);align-items:center;
+  padding:var(--s-5) 0;border-bottom:1px solid var(--hairline)}
+@media(max-width:720px){.q-row{grid-template-columns:1fr}}
+.perm td:first-child{font-weight:500}
+.perm .yes{color:var(--green)} .perm .no{color:var(--stone-40)}
+</style>
+<div class="shell">
+  <aside class="side">
+  <a class="brand" href="index.html" style="padding:0 var(--s-3) var(--s-2)"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+  <p class="mono-label muted" style="padding:0 var(--s-3) var(--s-4)">Admin console</p>
+  <div class="side__group"><p class="side__label">Business</p><button class="side__item is-active" data-nav="overview" data-title="Overview"><i data-ic="grid" data-size="18"></i>Overview</button><button class="side__item" data-nav="analytics" data-title="Analytics"><i data-ic="trend" data-size="18"></i>Analytics</button><button class="side__item" data-nav="revenue" data-title="Revenue"><i data-ic="rupee" data-size="18"></i>Revenue</button><button class="side__item" data-nav="reports" data-title="Reports"><i data-ic="doc" data-size="18"></i>Reports</button></div><div class="side__group"><p class="side__label">Inventory</p><button class="side__item" data-nav="props" data-title="Residences"><i data-ic="home" data-size="18"></i>Residences</button><button class="side__item" data-nav="approval" data-title="Approval queue"><i data-ic="check" data-size="18"></i>Approval queue<span class="push badge badge--gold">5</span></button><button class="side__item" data-nav="appts" data-title="Appointments"><i data-ic="calendar" data-size="18"></i>Appointments</button><button class="side__item" data-nav="payments" data-title="Payments"><i data-ic="card" data-size="18"></i>Payments</button></div><div class="side__group"><p class="side__label">People</p><button class="side__item" data-nav="users" data-title="Clients"><i data-ic="users" data-size="18"></i>Clients</button><button class="side__item" data-nav="agents" data-title="Advisors"><i data-ic="user" data-size="18"></i>Advisors</button><button class="side__item" data-nav="tickets" data-title="Support tickets"><i data-ic="ticket" data-size="18"></i>Support tickets<span class="push badge badge--gold">3</span></button></div><div class="side__group"><p class="side__label">Content</p><button class="side__item" data-nav="cms" data-title="Pages"><i data-ic="doc" data-size="18"></i>Pages</button><button class="side__item" data-nav="blog" data-title="Journal"><i data-ic="chat" data-size="18"></i>Journal</button><button class="side__item" data-nav="notifs" data-title="Notifications"><i data-ic="bell" data-size="18"></i>Notifications</button></div><div class="side__group"><p class="side__label">System</p><button class="side__item" data-nav="settings" data-title="Settings"><i data-ic="settings" data-size="18"></i>Settings</button><button class="side__item" data-nav="roles" data-title="Roles & permissions"><i data-ic="shield" data-size="18"></i>Roles & permissions</button></div>
+  <div class="side__group" style="margin-top:auto">
+    <a class="side__item" href="dashboard.html"><i data-ic="user" data-size="18"></i>Client view</a>
+    <a class="side__item" href="login.html"><i data-ic="logout" data-size="18"></i>Sign out</a>
+  </div>
+</aside>
+  <div>
+    <div class="dash-top">
+      <ol class="crumbs"><li><a href="index.html">Atria</a></li><li>Admin</li><li aria-current="page" data-crumb>Overview</li></ol>
+      <div class="push row gap-3">
+        <span class="badge badge--gold badge--dot">5 approvals waiting</span>
+        <button class="btn btn--ghost btn--sm" aria-label="Notifications"><i data-ic="bell" data-size="18"></i></button>
+        <span class="av av--sm av--ink">DS</span>
+      </div>
+    </div>
+    <div class="dash-body"><section data-pane="overview"><div class="pane-head">
+  <div><span class="eyebrow">July 2026 · month to date</span><h1 class="d3 mt-3">Overview</h1></div>
+  <div class="row gap-3">
+    <select class="select" style="width:180px;height:44px"><option>This month</option><option>Last 90 days</option><option>Financial year</option></select>
+    <button class="btn btn--outlined btn--sm" onclick="toast('Export queued','CSV will land in your email.','success')"><i data-ic="download" data-size="16"></i>Export</button>
+  </div>
+</div>
+<div class="tiles mt-8">
+  <div class="tile"><p class="stat__l" style="margin:0">Gross transaction value</p>
+    <p class="tile__k num mt-3">₹412 Cr</p><p class="delta delta--up mt-2">▲ 18.4% vs June</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Fee revenue</p>
+    <p class="tile__k num mt-3">₹8.24 Cr</p><p class="delta delta--up mt-2">▲ 11.2% vs June</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Active residences</p>
+    <p class="tile__k num mt-3">41</p><p class="delta delta--down mt-2">▼ 3 vs June</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Median days to close</p>
+    <p class="tile__k num mt-3">61</p><p class="delta delta--up mt-2">▲ 4 days slower</p></div>
+</div>
+
+<div class="cols-2 mt-8" style="gap:var(--s-6);grid-template-columns:1.4fr .6fr">
+  <div class="panel">
+    <div class="row" style="justify-content:space-between"><p class="h3">Viewings and offers</p>
+      <span class="cap">Last 8 months</span></div>
+    <div class="mt-6"><div class="chart-grid" style="padding-top:var(--s-5)">
+  <div class="bars"><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="12%"></div><div class="bars__bar" data-h="44%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="14%"></div><div class="bars__bar" data-h="52%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="11%"></div><div class="bars__bar" data-h="48%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="18%"></div><div class="bars__bar" data-h="64%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="16%"></div><div class="bars__bar" data-h="58%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="22%"></div><div class="bars__bar" data-h="76%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="19%"></div><div class="bars__bar" data-h="71%"></div></div><div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="26%"></div><div class="bars__bar" data-h="88%"></div></div></div>
+</div>
+<div class="row mt-3" style="justify-content:space-between"><span class="bars__x" style="flex:1;text-align:center">Dec</span><span class="bars__x" style="flex:1;text-align:center">Jan</span><span class="bars__x" style="flex:1;text-align:center">Feb</span><span class="bars__x" style="flex:1;text-align:center">Mar</span><span class="bars__x" style="flex:1;text-align:center">Apr</span><span class="bars__x" style="flex:1;text-align:center">May</span><span class="bars__x" style="flex:1;text-align:center">Jun</span><span class="bars__x" style="flex:1;text-align:center">Jul</span></div>
+<div class="legend mt-5"><span><i></i>Viewings</span><span><i class="g"></i>Offers</span></div></div>
+  </div>
+  <div class="panel">
+    <p class="h3">Pipeline</p>
+    <div class="row gap-5 mt-6" style="align-items:center">
+      <div class="donut" style="--v:68"><span class="num">68%</span></div>
+      <div class="stack gap-3 cap">
+        <span><strong class="num">14</strong> in negotiation</span>
+        <span><strong class="num">6</strong> offer accepted</span>
+        <span><strong class="num">3</strong> at registration</span>
+      </div>
+    </div>
+    <hr class="mt-6">
+    <dl class="mt-5">
+      <div class="kv"><dt>Conversion, viewing → offer</dt><dd>21.4%</dd></div>
+      <div class="kv"><dt>Average fee</dt><dd>2.0%</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="cols-2 mt-8" style="gap:var(--s-6)">
+  <div class="panel">
+    <div class="row" style="justify-content:space-between"><p class="h3">Needs your decision</p>
+      <button class="btn btn--ghost btn--sm" data-nav="approval">Open queue</button></div>
+    <div class="mt-4">
+      <div class="q-row"><span class="badge badge--warn badge--dot">New listing</span>
+        <div><p class="h4">Sea Breeze Villa, Kihim</p><p class="cap">Submitted by Rehan Kapadia · 2 hours ago</p></div>
+        <div class="row gap-2"><button class="btn btn--secondary btn--sm">Review</button></div></div>
+      <div class="q-row"><span class="badge badge--warn badge--dot">Price change</span>
+        <div><p class="h4">Casa Assagao — ₹10.4 Cr → ₹9.6 Cr</p><p class="cap">Meher Bhatia · 1 day ago</p></div>
+        <div class="row gap-2"><button class="btn btn--secondary btn--sm">Review</button></div></div>
+      <div class="q-row"><span class="badge badge--error badge--dot">Refund</span>
+        <div><p class="h4">₹25,000 to Rukmini Desai</p><p class="cap">Owner cancelled the viewing · 1 day ago</p></div>
+        <div class="row gap-2"><button class="btn btn--secondary btn--sm">Review</button></div></div>
+    </div>
+  </div>
+  <div class="panel">
+    <p class="h3">Top advisors this month</p>
+    <div class="table-wrap mt-5" style="border:0">
+      <table class="table">
+        <thead><tr><th>Advisor</th><th class="table__num">Closed</th><th class="table__num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="row gap-3"><span class="av av--xs">DS</span>Devan Shroff</td><td class="table__num">3</td><td class="table__num">₹164 Cr</td></tr>
+          <tr><td class="row gap-3"><span class="av av--xs">IS</span>Ira Sethna</td><td class="table__num">2</td><td class="table__num">₹79 Cr</td></tr>
+          <tr><td class="row gap-3"><span class="av av--xs">NR</span>Nikhil Raghavan</td><td class="table__num">2</td><td class="table__num">₹128 Cr</td></tr>
+          <tr><td class="row gap-3"><span class="av av--xs">MB</span>Meher Bhatia</td><td class="table__num">1</td><td class="table__num">₹9.6 Cr</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div></section><section data-pane="analytics" hidden><div class="pane-head"><h1 class="d3">Analytics</h1>
+  <div class="seg" data-seg><button aria-pressed="true">30 days</button><button aria-pressed="false">90 days</button><button aria-pressed="false">Year</button></div></div>
+<div class="tiles mt-8">
+  <div class="tile"><p class="stat__l" style="margin:0">Sessions</p><p class="tile__k num mt-3">184,220</p><p class="delta delta--up mt-2">▲ 9.6%</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Registered briefs</p><p class="tile__k num mt-3">1,412</p><p class="delta delta--up mt-2">▲ 14.1%</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Viewing requests</p><p class="tile__k num mt-3">308</p><p class="delta delta--up mt-2">▲ 6.2%</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Brief → viewing</p><p class="tile__k num mt-3">21.8%</p><p class="delta delta--down mt-2">▼ 1.4 pts</p></div>
+</div>
+<div class="panel mt-8">
+  <div class="row" style="justify-content:space-between"><p class="h3">Registered briefs</p><span class="cap">Rolling 10 weeks</span></div>
+  <div class="mt-6"><svg class="spark" viewBox="0 0 520 140" fill="none" aria-hidden="true">
+  <path d="M0 118 L52 104 L104 108 L156 82 L208 88 L260 58 L312 66 L364 40 L416 46 L468 22 L520 12"
+        stroke="#111111" stroke-width="1.4"/>
+  <path d="M0 118 L52 104 L104 108 L156 82 L208 88 L260 58 L312 66 L364 40 L416 46 L468 22 L520 12 L520 140 L0 140Z"
+        fill="#C8A96A" fill-opacity=".14" stroke="none"/>
+  <g stroke="#E4E0D8" stroke-width="1">
+    <path d="M0 35h520M0 70h520M0 105h520"/>
+  </g>
+  <g fill="#111"><circle cx="520" cy="12" r="3"/></g>
+</svg></div>
+</div>
+<div class="cols-2 mt-8" style="gap:var(--s-6)">
+  <div class="panel"><p class="h3">Most viewed residences</p>
+    <div class="table-wrap mt-5" style="border:0"><table class="table">
+      <thead><tr><th>Residence</th><th class="table__num">Views</th><th class="table__num">Saves</th><th class="table__num">Viewings</th></tr></thead>
+      <tbody>
+        <tr><td>Skyline Penthouse 4201</td><td class="table__num">14,208</td><td class="table__num">612</td><td class="table__num">7</td></tr>
+        <tr><td>Bungalow Twelve</td><td class="table__num">11,864</td><td class="table__num">548</td><td class="table__num">2</td></tr>
+        <tr><td>The Malabar Duplex</td><td class="table__num">9,910</td><td class="table__num">402</td><td class="table__num">5</td></tr>
+        <tr><td>Villa Anantara</td><td class="table__num">8,447</td><td class="table__num">388</td><td class="table__num">6</td></tr>
+      </tbody></table></div></div>
+  <div class="panel"><p class="h3">Where briefs come from</p>
+    <div class="stack gap-5 mt-6">
+      <div><div class="row" style="justify-content:space-between"><span class="b2">Direct</span><span class="num cap">38%</span></div>
+        <div class="progress mt-2"><div class="progress__fill" style="width:38%"></div></div></div>
+      <div><div class="row" style="justify-content:space-between"><span class="b2">Referral from clients</span><span class="num cap">27%</span></div>
+        <div class="progress mt-2"><div class="progress__fill" style="width:27%"></div></div></div>
+      <div><div class="row" style="justify-content:space-between"><span class="b2">Search</span><span class="num cap">21%</span></div>
+        <div class="progress mt-2"><div class="progress__fill" style="width:21%"></div></div></div>
+      <div><div class="row" style="justify-content:space-between"><span class="b2">The journal</span><span class="num cap">14%</span></div>
+        <div class="progress mt-2"><div class="progress__fill" style="width:14%"></div></div></div>
+    </div></div>
+</div></section><section data-pane="revenue" hidden><div class="pane-head"><h1 class="d3">Revenue</h1>
+  <button class="btn btn--outlined btn--sm" onclick="toast('Statement queued','FY 2026–27 P&amp;L extract.','success')"><i data-ic="download" data-size="16"></i>Download</button></div>
+<div class="tiles mt-8">
+  <div class="tile"><p class="stat__l" style="margin:0">Fee revenue, FY to date</p><p class="tile__k num mt-3">₹31.6 Cr</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Collected</p><p class="tile__k num mt-3">₹27.4 Cr</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Outstanding</p><p class="tile__k num mt-3">₹4.2 Cr</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Refunded</p><p class="tile__k num mt-3">₹6.1 L</p></div>
+</div>
+<div class="panel mt-8">
+  <p class="h3">Closed transactions</p>
+  <div class="table-wrap mt-5" style="border:0"><table class="table">
+    <thead><tr><th>Residence</th><th>Buyer</th><th>Advisor</th><th>Closed</th><th class="table__num">Value</th><th class="table__num">Fee</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Bungalow Twelve</td><td>Private trust</td><td>Nikhil Raghavan</td><td class="num">14 Jul 2026</td><td class="table__num">₹92.0 Cr</td><td class="table__num">₹1.84 Cr</td><td><span class="badge badge--success badge--dot">Collected</span></td></tr>
+      <tr><td>Palm Court Penthouse</td><td>A. Mehta</td><td>Devan Shroff</td><td class="num">09 Jul 2026</td><td class="table__num">₹26.8 Cr</td><td class="table__num">₹53.6 L</td><td><span class="badge badge--success badge--dot">Collected</span></td></tr>
+      <tr><td>Tea Estate Residence</td><td>S. Iyer</td><td>Ananya Varma</td><td class="num">02 Jul 2026</td><td class="table__num">₹6.4 Cr</td><td class="table__num">₹12.8 L</td><td><span class="badge badge--warn badge--dot">Invoiced</span></td></tr>
+      <tr><td>The Ridge House</td><td>K. Anand</td><td>Ananya Varma</td><td class="num">27 Jun 2026</td><td class="table__num">₹7.2 Cr</td><td class="table__num">₹14.4 L</td><td><span class="badge badge--error badge--dot">Overdue 12d</span></td></tr>
+    </tbody></table></div>
+  <div class="row mt-6" style="justify-content:space-between"><p class="cap">4 of 27 shown</p>
+    <div class="pager"><button aria-label="Previous" disabled><i data-ic="chevL" data-size="16"></i></button>
+      <button aria-current="page">1</button><button>2</button><button>3</button>
+      <button aria-label="Next"><i data-ic="chevR" data-size="16"></i></button></div></div>
+</div></section><section data-pane="reports" hidden><div class="pane-head"><h1 class="d3">Reports</h1>
+  <button class="btn btn--primary btn--sm">Build a report</button></div>
+<div class="cols-3 mt-8">
+  <div class="panel"><p class="mono-label muted">Monthly</p><p class="h3 mt-3">Transaction register</p>
+    <p class="b2 ink60 mt-2">Every closed deal with fee, advisor and collection status.</p>
+    <button class="btn btn--outlined btn--sm mt-5"><i data-ic="download" data-size="16"></i>June 2026</button></div>
+  <div class="panel"><p class="mono-label muted">Quarterly</p><p class="h3 mt-3">Inventory ageing</p>
+    <p class="b2 ink60 mt-2">Days on market by city, type and price band.</p>
+    <button class="btn btn--outlined btn--sm mt-5"><i data-ic="download" data-size="16"></i>Q1 FY27</button></div>
+  <div class="panel"><p class="mono-label muted">Annual</p><p class="h3 mt-3">RERA compliance</p>
+    <p class="b2 ink60 mt-2">Registration numbers, disclosures and complaint log.</p>
+    <button class="btn btn--outlined btn--sm mt-5"><i data-ic="download" data-size="16"></i>FY 2025–26</button></div>
+</div>
+<div class="panel mt-8"><p class="h3">Scheduled reports</p>
+  <div class="table-wrap mt-5" style="border:0"><table class="table">
+    <thead><tr><th>Report</th><th>Frequency</th><th>Recipients</th><th>Next run</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Transaction register</td><td>Monthly, 1st</td><td>Devan Shroff, accounts</td><td class="num">01 Aug 2026</td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+      <tr><td>Advisor scorecard</td><td>Weekly, Monday</td><td>All principals</td><td class="num">27 Jul 2026</td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+      <tr><td>Failed payments</td><td>Daily, 08:00</td><td>accounts@atria.house</td><td class="num">26 Jul 2026</td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+    </tbody></table></div></div></section><section data-pane="props" hidden><div class="pane-head"><h1 class="d3">Residences</h1>
+  <div class="row gap-3"><div class="input-group" style="width:240px">
+      <span class="input-group__icon"><i data-ic="search" data-size="18"></i></span>
+      <input class="input" type="search" placeholder="Search 41 residences" aria-label="Search residences"></div>
+    <button class="btn btn--primary btn--sm"><i data-ic="plus" data-size="16"></i>Add residence</button></div></div>
+<div class="row gap-2 mt-6 wrapline"><button class="chip is-on">All (41)</button><button class="chip">Published (29)</button>
+  <button class="chip">Off-market (12)</button><button class="chip">Draft (4)</button><button class="chip">Sold (18)</button></div>
+<div class="table-wrap mt-6"><table class="table">
+  <thead><tr><th></th><th>Residence</th><th>Type</th><th>City</th><th class="table__num">Price</th><th>Advisor</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody><tr><td><span class="plate plate--horizon" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Villa Anantara</strong><p class="cap">8,200 sq ft · 5 bed</p></td>
+  <td>Villa</td><td>Awas Beach, Alibaug</td><td class="table__num">₹18.4 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--warn badge--dot">Off-market</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--tower" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>The Malabar Duplex</strong><p class="cap">5,400 sq ft · 4 bed</p></td>
+  <td>Apartment</td><td>Malabar Hill, Mumbai</td><td class="table__num">₹32.0 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--success badge--dot">Published</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--night" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Skyline Penthouse 4201</strong><p class="cap">9,100 sq ft · 5 bed</p></td>
+  <td>Penthouse</td><td>Worli Sea Face, Mumbai</td><td class="table__num">₹47.5 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--success badge--dot">Published</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--court" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Casa Assagao</strong><p class="cap">6,300 sq ft · 4 bed</p></td>
+  <td>Villa</td><td>Assagao, North Goa</td><td class="table__num">₹9.6 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--warn badge--dot">Off-market</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--portal" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Bungalow Twelve</strong><p class="cap">14,000 sq ft · 6 bed</p></td>
+  <td>Bungalow</td><td>Prithviraj Road, New Delhi</td><td class="table__num">₹92.0 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--success badge--dot">Published</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--slab" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>The Ridge House</strong><p class="cap">4,800 sq ft · 3 bed</p></td>
+  <td>Villa</td><td>Kasauli, Himachal</td><td class="table__num">₹7.2 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--success badge--dot">Published</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--light" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Tea Estate Residence</strong><p class="cap">5,100 sq ft · 4 bed</p></td>
+  <td>Villa</td><td>Coonoor, Nilgiris</td><td class="table__num">₹6.4 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--warn badge--dot">Off-market</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--stair" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Bandra Terraces 1801</strong><p class="cap">3,600 sq ft · 3 bed</p></td>
+  <td>Apartment</td><td>Bandra West, Mumbai</td><td class="table__num">₹14.2 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--success badge--dot">Published</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr><tr><td><span class="plate plate--pool" style="display:block;width:52px;height:40px"></span></td>
+  <td><strong>Palm Court Penthouse</strong><p class="cap">6,900 sq ft · 4 bed</p></td>
+  <td>Penthouse</td><td>Juhu, Mumbai</td><td class="table__num">₹26.8 Cr</td>
+  <td class="row gap-2"><span class="av av--xs">IS</span>Ira Sethna</td>
+  <td><span class="badge badge--success badge--dot">Published</span></td>
+  <td><div class="row gap-2"><button class="btn btn--ghost btn--sm">Edit</button>
+    <button class="btn btn--ghost btn--sm">Hide</button></div></td></tr></tbody></table></div></section><section data-pane="approval" hidden><div class="pane-head"><h1 class="d3">Approval queue</h1><span class="badge badge--gold">5 waiting</span></div>
+<div class="panel mt-8">
+  <div class="q-row"><span class="badge badge--warn badge--dot">New listing</span>
+    <div><p class="h4">Sea Breeze Villa, Kihim</p>
+      <p class="cap">₹12.8 Cr · 4 bed · 6,100 sq ft · submitted by Rehan Kapadia, 2 hours ago</p>
+      <p class="cap mt-2">Checks: measurements ✓ · photographs ✓ · RERA number missing</p></div>
+    <div class="row gap-2"><button class="btn btn--outlined btn--sm" data-modal="m-rev">Review</button>
+      <button class="btn btn--primary btn--sm" onclick="toast('Published','Sea Breeze Villa is live.','success')">Approve</button></div></div>
+  <div class="q-row"><span class="badge badge--warn badge--dot">Price change</span>
+    <div><p class="h4">Casa Assagao · ₹10.4 Cr → ₹9.6 Cr</p>
+      <p class="cap">−7.7% · owner instruction on file · Meher Bhatia, 1 day ago</p></div>
+    <div class="row gap-2"><button class="btn btn--outlined btn--sm">Review</button>
+      <button class="btn btn--primary btn--sm" onclick="toast('Price updated','Alerts sent to 14 saved searches.','success')">Approve</button></div></div>
+  <div class="q-row"><span class="badge badge--error badge--dot">Refund</span>
+    <div><p class="h4">₹25,000 to Rukmini Desai</p><p class="cap">Owner cancelled the viewing · reference AT-89901</p></div>
+    <div class="row gap-2"><button class="btn btn--outlined btn--sm">Review</button>
+      <button class="btn btn--primary btn--sm" onclick="toast('Refund issued','Credited in 5 working days.','success')">Approve</button></div></div>
+  <div class="q-row"><span class="badge badge--dot">Advisor profile</span>
+    <div><p class="h4">Ananya Varma — bio and photograph update</p><p class="cap">3 days ago</p></div>
+    <div class="row gap-2"><button class="btn btn--outlined btn--sm">Review</button>
+      <button class="btn btn--primary btn--sm">Approve</button></div></div>
+  <div class="q-row"><span class="badge badge--dot">Journal</span>
+    <div><p class="h4">"Stamp duty, TDS and the NRI file" — ready to publish</p><p class="cap">Ira Sethna · 4 days ago</p></div>
+    <div class="row gap-2"><button class="btn btn--outlined btn--sm">Review</button>
+      <button class="btn btn--primary btn--sm">Publish</button></div></div>
+</div>
+<div class="modal" id="m-rev" role="dialog" aria-modal="true" aria-labelledby="revt">
+  <div class="modal__scrim"></div>
+  <div class="modal__box modal__box--wide">
+    <button class="modal__x" data-dismiss aria-label="Close"><i data-ic="x"></i></button>
+    <span class="badge badge--warn badge--dot">Awaiting approval</span>
+    <h2 class="h1 mt-4" id="revt">Sea Breeze Villa, Kihim</h2>
+    <div class="cols-2 mt-6" style="gap:var(--s-6)">
+      <div class="pf"><div class="plate plate--horizon ar-4-3"></div></div>
+      <dl>
+        <div class="kv"><dt>Guide price</dt><dd>₹12.8 Cr</dd></div>
+        <div class="kv"><dt>Carpet area</dt><dd>6,100 sq ft</dd></div>
+        <div class="kv"><dt>Measured on</dt><dd>21 Jul 2026</dd></div>
+        <div class="kv"><dt>RERA</dt><dd style="color:var(--red)">Missing</dd></div>
+      </dl>
+    </div>
+    <div class="field mt-6"><label class="field__label" for="revn">Note to the advisor</label>
+      <textarea class="textarea" id="revn" placeholder="Add the RERA registration number and resubmit."></textarea></div>
+    <div class="row gap-3 mt-6">
+      <button class="btn btn--primary" onclick="closeModal('m-rev');toast('Published','Sea Breeze Villa is live.','success')">Approve and publish</button>
+      <button class="btn btn--danger" onclick="closeModal('m-rev');toast('Sent back','Rehan has been notified.','error')">Send back</button>
+      <button class="btn btn--ghost" data-dismiss>Cancel</button>
+    </div>
+  </div>
+</div></section><section data-pane="appts" hidden><div class="pane-head"><h1 class="d3">Appointments</h1>
+  <div class="seg" data-seg><button aria-pressed="true">Week</button><button aria-pressed="false">Month</button><button aria-pressed="false">List</button></div></div>
+<div class="tiles mt-8">
+  <div class="tile"><p class="stat__l" style="margin:0">This week</p><p class="tile__k num mt-3">34</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Confirmed</p><p class="tile__k num mt-3">29</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Awaiting owner</p><p class="tile__k num mt-3">4</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">No-shows, 30 days</p><p class="tile__k num mt-3">2</p></div>
+</div>
+<div class="table-wrap mt-8"><table class="table">
+  <thead><tr><th>When</th><th>Residence</th><th>Client</th><th>Advisor</th><th>Visitors</th><th>ID</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td class="num">Thu 30 Jul · 10:00</td><td>Skyline Penthouse 4201</td><td>Rukmini Desai</td><td>Ira Sethna</td><td class="num">2</td><td><span class="badge badge--warn">1 of 2</span></td><td><span class="badge badge--success badge--dot">Confirmed</span></td></tr>
+    <tr><td class="num">Thu 30 Jul · 15:30</td><td>The Malabar Duplex</td><td>K. Anand</td><td>Ira Sethna</td><td class="num">1</td><td><span class="badge badge--success">Verified</span></td><td><span class="badge badge--success badge--dot">Confirmed</span></td></tr>
+    <tr><td class="num">Fri 31 Jul · 11:00</td><td>Villa Anantara</td><td>A. &amp; T. Menon</td><td>Rehan Kapadia</td><td class="num">3</td><td><span class="badge badge--success">Verified</span></td><td><span class="badge badge--warn badge--dot">Owner to confirm</span></td></tr>
+    <tr><td class="num">Sat 01 Aug · 17:30</td><td>Casa Assagao</td><td>F. Noorani</td><td>Meher Bhatia</td><td class="num">2</td><td><span class="badge badge--error">Not uploaded</span></td><td><span class="badge badge--warn badge--dot">Pending</span></td></tr>
+  </tbody></table></div></section><section data-pane="payments" hidden><div class="pane-head"><h1 class="d3">Payments</h1>
+  <div class="row gap-3"><select class="select" style="width:180px;height:44px"><option>All methods</option><option>Card</option><option>UPI</option><option>Bank transfer</option></select>
+    <button class="btn btn--outlined btn--sm"><i data-ic="download" data-size="16"></i>Export</button></div></div>
+<div class="tiles mt-8">
+  <div class="tile"><p class="stat__l" style="margin:0">Collected, month</p><p class="tile__k num mt-3">₹18.4 L</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Reservation fees held</p><p class="tile__k num mt-3">₹3.25 L</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Failed attempts</p><p class="tile__k num mt-3">9</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Refunds pending</p><p class="tile__k num mt-3">1</p></div>
+</div>
+<div class="table-wrap mt-8"><table class="table">
+  <thead><tr><th>Reference</th><th>Client</th><th>For</th><th>Method</th><th>Date</th><th class="table__num">Amount</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td class="num">AT-91204</td><td>Rukmini Desai</td><td>Viewing reservation</td><td>Card ••4417</td><td class="num">22 Jul</td><td class="table__num">₹29,500</td><td><span class="badge badge--success badge--dot">Settled</span></td></tr>
+    <tr><td class="num">AT-91198</td><td>K. Anand</td><td>Valuation report</td><td>UPI</td><td class="num">21 Jul</td><td class="table__num">₹47,000</td><td><span class="badge badge--success badge--dot">Settled</span></td></tr>
+    <tr><td class="num">AT-91205</td><td>Rukmini Desai</td><td>Viewing reservation</td><td>Card ••4417</td><td class="num">22 Jul</td><td class="table__num">₹29,500</td><td><span class="badge badge--error badge--dot">Declined</span></td></tr>
+    <tr><td class="num">AT-89901</td><td>Rukmini Desai</td><td>Viewing reservation</td><td>UPI</td><td class="num">10 Jun</td><td class="table__num">₹25,000</td><td><span class="badge badge--warn badge--dot">Refund pending</span></td></tr>
+  </tbody></table></div></section><section data-pane="users" hidden><div class="pane-head"><h1 class="d3">Clients</h1>
+  <div class="row gap-3"><div class="input-group" style="width:240px">
+    <span class="input-group__icon"><i data-ic="search" data-size="18"></i></span>
+    <input class="input" type="search" placeholder="Name, email or ID" aria-label="Search clients"></div>
+    <button class="btn btn--outlined btn--sm">Invite a client</button></div></div>
+<div class="row gap-2 mt-6 wrapline"><button class="chip is-on">All (1,412)</button><button class="chip">Verified (1,208)</button>
+  <button class="chip">Private register (96)</button><button class="chip">Dormant (204)</button></div>
+<div class="table-wrap mt-6"><table class="table">
+  <thead><tr><th>Client</th><th>ID</th><th>Brief</th><th>Advisor</th><th>Joined</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+    <tr><td class="row gap-3"><span class="av av--xs av--gold">RD</span><div><strong>Rukmini Desai</strong><p class="cap">r.desai@email.com</p></div></td>
+      <td class="num">AT-4471</td><td>Mumbai South · ₹30 Cr +</td><td>Ira Sethna</td><td class="num">Mar 2026</td>
+      <td><span class="badge badge--success badge--dot">Verified</span></td><td><button class="btn btn--ghost btn--sm">Open</button></td></tr>
+    <tr><td class="row gap-3"><span class="av av--xs">KA</span><div><strong>Kabir Anand</strong><p class="cap">kabir@email.com</p></div></td>
+      <td class="num">AT-4288</td><td>Bandra West · ₹10–25 Cr</td><td>Ira Sethna</td><td class="num">Jan 2026</td>
+      <td><span class="badge badge--success badge--dot">Verified</span></td><td><button class="btn btn--ghost btn--sm">Open</button></td></tr>
+    <tr><td class="row gap-3"><span class="av av--xs">AM</span><div><strong>Arvind Menon</strong><p class="cap">a.menon@email.com</p></div></td>
+      <td class="num">AT-3901</td><td>Alibaug · villas</td><td>Rehan Kapadia</td><td class="num">Aug 2025</td>
+      <td><span class="badge badge--gold badge--dot">Private register</span></td><td><button class="btn btn--ghost btn--sm">Open</button></td></tr>
+    <tr><td class="row gap-3"><span class="av av--xs">FN</span><div><strong>Farhan Noorani</strong><p class="cap">farhan@email.com</p></div></td>
+      <td class="num">AT-3644</td><td>Goa · selling</td><td>Meher Bhatia</td><td class="num">Apr 2025</td>
+      <td><span class="badge badge--dot">Dormant</span></td><td><button class="btn btn--ghost btn--sm">Open</button></td></tr>
+  </tbody></table></div></section><section data-pane="agents" hidden><div class="pane-head"><h1 class="d3">Advisors</h1>
+  <button class="btn btn--primary btn--sm"><i data-ic="plus" data-size="16"></i>Add advisor</button></div>
+<div class="table-wrap mt-8"><table class="table">
+  <thead><tr><th>Advisor</th><th>Territory</th><th class="table__num">On books</th><th class="table__num">Closed, FY</th><th class="table__num">Rating</th><th>Role</th><th></th></tr></thead>
+  <tbody><tr><td class="row gap-3"><span class="av av--xs">IS</span><div><strong>Ira Sethna</strong><p class="cap">17 yrs</p></div></td>
+  <td>Principal Advisor, Mumbai South</td><td class="table__num">4</td><td class="table__num">₹1,840 Cr</td><td class="table__num">4.9</td>
+  <td><span class="badge">Principal</span></td><td><button class="btn btn--ghost btn--sm">Manage</button></td></tr><tr><td class="row gap-3"><span class="av av--xs">RK</span><div><strong>Rehan Kapadia</strong><p class="cap">12 yrs</p></div></td>
+  <td>Director, Alibaug & Coastal</td><td class="table__num">5</td><td class="table__num">₹960 Cr</td><td class="table__num">4.8</td>
+  <td><span class="badge">Principal</span></td><td><button class="btn btn--ghost btn--sm">Manage</button></td></tr><tr><td class="row gap-3"><span class="av av--xs">MB</span><div><strong>Meher Bhatia</strong><p class="cap">9 yrs</p></div></td>
+  <td>Advisor, Goa Portfolio</td><td class="table__num">6</td><td class="table__num">₹512 Cr</td><td class="table__num">5.0</td>
+  <td><span class="badge">Advisor</span></td><td><button class="btn btn--ghost btn--sm">Manage</button></td></tr><tr><td class="row gap-3"><span class="av av--xs">NR</span><div><strong>Nikhil Raghavan</strong><p class="cap">21 yrs</p></div></td>
+  <td>Principal Advisor, Delhi NCR</td><td class="table__num">7</td><td class="table__num">₹2,410 Cr</td><td class="table__num">4.9</td>
+  <td><span class="badge">Principal</span></td><td><button class="btn btn--ghost btn--sm">Manage</button></td></tr><tr><td class="row gap-3"><span class="av av--xs">AV</span><div><strong>Ananya Varma</strong><p class="cap">7 yrs</p></div></td>
+  <td>Advisor, Hill Estates</td><td class="table__num">8</td><td class="table__num">₹268 Cr</td><td class="table__num">4.7</td>
+  <td><span class="badge">Advisor</span></td><td><button class="btn btn--ghost btn--sm">Manage</button></td></tr><tr><td class="row gap-3"><span class="av av--xs">DS</span><div><strong>Devan Shroff</strong><p class="cap">24 yrs</p></div></td>
+  <td>Head of Private Sales</td><td class="table__num">9</td><td class="table__num">₹3,120 Cr</td><td class="table__num">4.9</td>
+  <td><span class="badge">Principal</span></td><td><button class="btn btn--ghost btn--sm">Manage</button></td></tr></tbody></table></div></section><section data-pane="tickets" hidden><div class="pane-head"><h1 class="d3">Support tickets</h1><span class="badge badge--gold">3 open</span></div>
+<div class="row gap-2 mt-6 wrapline"><button class="chip is-on">Open (3)</button><button class="chip">Waiting on client (2)</button>
+  <button class="chip">Resolved (48)</button></div>
+<div class="panel mt-6">
+  <div class="q-row"><span class="badge badge--error badge--dot">High</span>
+    <div><p class="h4">#1204 · Cannot upload identity document</p>
+      <p class="cap">Rukmini Desai · opened 2 hours ago · file over 10 MB, no error shown</p></div>
+    <div class="row gap-2"><button class="btn btn--secondary btn--sm">Assign to me</button>
+      <button class="btn btn--ghost btn--sm">Reply</button></div></div>
+  <div class="q-row"><span class="badge badge--warn badge--dot">Normal</span>
+    <div><p class="h4">#1203 · Invoice GSTIN is wrong</p>
+      <p class="cap">K. Anand · opened 1 day ago · needs a credit note and reissue</p></div>
+    <div class="row gap-2"><button class="btn btn--secondary btn--sm">Assign to me</button>
+      <button class="btn btn--ghost btn--sm">Reply</button></div></div>
+  <div class="q-row"><span class="badge badge--dot">Low</span>
+    <div><p class="h4">#1201 · Unsubscribe from journal not working</p>
+      <p class="cap">F. Noorani · opened 3 days ago</p></div>
+    <div class="row gap-2"><button class="btn btn--secondary btn--sm">Assign to me</button>
+      <button class="btn btn--ghost btn--sm">Reply</button></div></div>
+</div>
+<div class="cols-2 mt-8" style="gap:var(--s-6)">
+  <div class="panel"><p class="h3">First response time</p><p class="d3 num mt-4">1h 12m</p>
+    <p class="cap mt-2">Target is 3 hours. Twelve tickets this month.</p></div>
+  <div class="panel"><p class="h3">Satisfaction</p><p class="d3 num mt-4">4.7</p>
+    <p class="cap mt-2">From 34 rated tickets in the last 90 days.</p></div>
+</div></section><section data-pane="cms" hidden><div class="pane-head"><h1 class="d3">Pages</h1>
+  <button class="btn btn--primary btn--sm"><i data-ic="plus" data-size="16"></i>New page</button></div>
+<div class="table-wrap mt-8"><table class="table">
+  <thead><tr><th>Page</th><th>Path</th><th>Updated</th><th>By</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+    <tr><td><strong>Landing</strong></td><td class="cap">/</td><td class="num">24 Jul 2026</td><td>Devan Shroff</td><td><span class="badge badge--success badge--dot">Live</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+    <tr><td><strong>Our house</strong></td><td class="cap">/about</td><td class="num">18 Jul 2026</td><td>Devan Shroff</td><td><span class="badge badge--success badge--dot">Live</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+    <tr><td><strong>Contact</strong></td><td class="cap">/contact</td><td class="num">11 Jul 2026</td><td>Ira Sethna</td><td><span class="badge badge--success badge--dot">Live</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+    <tr><td><strong>Private register</strong></td><td class="cap">/register</td><td class="num">02 Jul 2026</td><td>Devan Shroff</td><td><span class="badge badge--warn badge--dot">Draft</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+  </tbody></table></div>
+<div class="panel mt-8"><p class="h3">Landing page hero</p>
+  <div class="cols-2 mt-6" style="gap:var(--s-6)">
+    <div class="field"><label class="field__label" for="cm1">Headline</label>
+      <input class="input" id="cm1" value="Homes that were drawn before they were sold."></div>
+    <div class="field"><label class="field__label" for="cm2">Eyebrow</label>
+      <input class="input" id="cm2" value="Private residential brokerage · Mumbai, Delhi, Goa"></div>
+  </div>
+  <div class="field mt-5"><label class="field__label" for="cm3">Supporting line</label>
+    <textarea class="textarea" id="cm3">Forty-one residences on our books this quarter. Each one measured, photographed and floor-planned by us — never by the developer.</textarea></div>
+  <div class="row gap-3 mt-6"><button class="btn btn--primary" onclick="toast('Published','Live in about a minute.','success')">Publish changes</button>
+    <button class="btn btn--ghost">Preview</button></div></div></section><section data-pane="blog" hidden><div class="pane-head"><h1 class="d3">Journal</h1>
+  <button class="btn btn--primary btn--sm"><i data-ic="plus" data-size="16"></i>New piece</button></div>
+<div class="row gap-2 mt-6 wrapline"><button class="chip is-on">All (28)</button><button class="chip">Published (24)</button>
+  <button class="chip">In review (1)</button><button class="chip">Draft (3)</button></div>
+<div class="table-wrap mt-6"><table class="table">
+  <thead><tr><th>Title</th><th>Category</th><th>Author</th><th>Date</th><th class="table__num">Reads</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+    <tr><td><strong>What a 3.7 metre ceiling actually costs you</strong></td><td>Architecture</td><td>Ira Sethna</td><td class="num">18 Jul</td><td class="table__num">8,412</td><td><span class="badge badge--success badge--dot">Published</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+    <tr><td><strong>Buying in a 1968 society</strong></td><td>Due diligence</td><td>Ira Sethna</td><td class="num">09 Jul</td><td class="table__num">6,208</td><td><span class="badge badge--success badge--dot">Published</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+    <tr><td><strong>Stamp duty, TDS and the NRI file</strong></td><td>Due diligence</td><td>Ira Sethna</td><td class="num">—</td><td class="table__num">—</td><td><span class="badge badge--warn badge--dot">In review</span></td><td><button class="btn btn--secondary btn--sm">Review</button></td></tr>
+    <tr><td><strong>Kasauli: what the new road did</strong></td><td>Market</td><td>Ananya Varma</td><td class="num">—</td><td class="table__num">—</td><td><span class="badge badge--dot">Draft</span></td><td><button class="btn btn--ghost btn--sm">Edit</button></td></tr>
+  </tbody></table></div></section><section data-pane="notifs" hidden><div class="pane-head"><h1 class="d3">Notifications</h1>
+  <button class="btn btn--primary btn--sm" data-modal="m-broadcast">New broadcast</button></div>
+<div class="cols-2 mt-8" style="gap:var(--s-6)">
+  <div class="panel"><p class="h3">Recent sends</p>
+    <div class="mt-4">
+      <div class="q-row"><span class="badge badge--success badge--dot">Sent</span>
+        <div><p class="h4">Casa Assagao price change</p><p class="cap">14 saved searches · 92% opened</p></div>
+        <span class="cap">1d</span></div>
+      <div class="q-row"><span class="badge badge--success badge--dot">Sent</span>
+        <div><p class="h4">July journal</p><p class="cap">1,208 subscribers · 41% opened</p></div>
+        <span class="cap">6d</span></div>
+      <div class="q-row"><span class="badge badge--warn badge--dot">Scheduled</span>
+        <div><p class="h4">Two new off-market residences</p><p class="cap">96 private-register clients · 26 Jul, 09:00</p></div>
+        <span class="cap">Tue</span></div>
+    </div></div>
+  <div class="panel"><p class="h3">Channels</p>
+    <div class="stack gap-5 mt-6">
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Email</span></label>
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>SMS for viewing reminders</span></label>
+      <label class="switch"><input type="checkbox"><span class="switch__track"></span><span>WhatsApp (pilot)</span></label>
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>In-portal alerts</span></label>
+    </div>
+    <hr class="mt-6">
+    <p class="cap mt-5">Quiet hours are 21:00–08:00 IST. Nothing sends outside them except viewing cancellations.</p></div>
+</div>
+<div class="modal" id="m-broadcast" role="dialog" aria-modal="true" aria-labelledby="bct">
+  <div class="modal__scrim"></div>
+  <div class="modal__box">
+    <button class="modal__x" data-dismiss aria-label="Close"><i data-ic="x"></i></button>
+    <h2 class="h1" id="bct">New broadcast</h2>
+    <form class="mt-6" data-validate data-msg="Broadcast scheduled" data-sub="96 recipients, tomorrow at 09:00.">
+      <div class="field"><label class="field__label" for="bc1">Audience</label>
+        <select class="select" id="bc1" required><option>Private register (96)</option><option>All verified clients (1,208)</option><option>Journal subscribers (1,208)</option></select></div>
+      <div class="field mt-5"><label class="field__label" for="bc2">Subject</label>
+        <input class="input" id="bc2" required placeholder="Two new residences, shown by appointment"></div>
+      <div class="field mt-5"><label class="field__label" for="bc3">Message</label>
+        <textarea class="textarea" id="bc3" required placeholder="Keep it short. One residence per paragraph."></textarea></div>
+      <button class="btn btn--primary btn--block mt-6" type="submit">Schedule broadcast</button>
+    </form>
+  </div>
+</div></section><section data-pane="settings" hidden><div class="pane-head"><h1 class="d3">Settings</h1>
+  <button class="btn btn--primary btn--sm" onclick="toast('Settings saved','','success')">Save changes</button></div>
+<div class="cols-2 mt-8" style="gap:var(--s-9)">
+  <div>
+    <h2 class="h2">Firm details</h2>
+    <div class="stack gap-5 mt-5">
+      <div class="field"><label class="field__label" for="s1">Legal name</label><input class="input" id="s1" value="Atria Residential Pvt Ltd"></div>
+      <div class="field"><label class="field__label" for="s2">GSTIN</label><input class="input num" id="s2" value="27AABCA1234M1Z5"></div>
+      <div class="field"><label class="field__label" for="s3">RERA registration</label><input class="input num" id="s3" value="A52100031204"></div>
+      <div class="field"><label class="field__label" for="s4">Default fee</label><input class="input" id="s4" value="2.0%"><p class="field__hint">Advisors can override per instruction with a principal's approval.</p></div>
+    </div>
+    <h2 class="h2 mt-9">Viewings</h2>
+    <div class="cols-2 mt-5" style="gap:var(--s-5)">
+      <div class="field"><label class="field__label" for="s5">Reservation fee</label><input class="input num" id="s5" value="25000"></div>
+      <div class="field"><label class="field__label" for="s6">Slot length</label>
+        <select class="select" id="s6"><option>45 minutes</option><option>30 minutes</option><option>60 minutes</option></select></div>
+    </div>
+    <div class="stack gap-4 mt-6">
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Require photo ID for every visitor</span></label>
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Delete ID uploads after 72 hours</span></label>
+      <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Free cancellation until 18:00 the day before</span></label>
+    </div>
+  </div>
+  <div>
+    <h2 class="h2">Integrations</h2>
+    <div class="stack gap-4 mt-5">
+      <div class="panel row gap-4"><span class="av av--sm av--square"><i data-ic="card" data-size="16"></i></span>
+        <div><p class="h4">Razorpay</p><p class="cap">Live keys · connected 14 Mar 2026</p></div>
+        <span class="push badge badge--success badge--dot">Connected</span></div>
+      <div class="panel row gap-4"><span class="av av--sm av--square"><i data-ic="mail" data-size="16"></i></span>
+        <div><p class="h4">Postmark</p><p class="cap">Transactional email</p></div>
+        <span class="push badge badge--success badge--dot">Connected</span></div>
+      <div class="panel row gap-4"><span class="av av--sm av--square"><i data-ic="chat" data-size="16"></i></span>
+        <div><p class="h4">WhatsApp Business</p><p class="cap">Pilot, Mumbai team only</p></div>
+        <button class="btn btn--outlined btn--sm push">Connect</button></div>
+    </div>
+    <h2 class="h2 mt-9">Audit log</h2>
+    <dl class="mt-5">
+      <div class="kv"><dt>Fee default changed to 2.0%</dt><dd>D. Shroff · 12 Jul</dd></div>
+      <div class="kv"><dt>Razorpay keys rotated</dt><dd>System · 01 Jul</dd></div>
+      <div class="kv"><dt>Role "Coordinator" created</dt><dd>D. Shroff · 22 Jun</dd></div>
+    </dl>
+  </div>
+</div></section><section data-pane="roles" hidden><div class="pane-head"><h1 class="d3">Roles &amp; permissions</h1>
+  <button class="btn btn--primary btn--sm"><i data-ic="plus" data-size="16"></i>New role</button></div>
+<div class="tiles mt-8">
+  <div class="tile"><p class="stat__l" style="margin:0">Principal</p><p class="tile__k num mt-3">3</p><p class="cap mt-2">Full access</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Advisor</p><p class="tile__k num mt-3">25</p><p class="cap mt-2">Own book only</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Coordinator</p><p class="tile__k num mt-3">4</p><p class="cap mt-2">Viewings and documents</p></div>
+  <div class="tile"><p class="stat__l" style="margin:0">Accounts</p><p class="tile__k num mt-3">2</p><p class="cap mt-2">Payments and reports</p></div>
+</div>
+<div class="table-wrap mt-8"><table class="table perm">
+  <thead><tr><th>Permission</th><th class="center">Principal</th><th class="center">Advisor</th><th class="center">Coordinator</th><th class="center">Accounts</th></tr></thead>
+  <tbody><tr><td>Publish a residence</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td></tr><tr><td>Edit own listings</td><td class="center yes">&#10003;</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td></tr><tr><td>Edit any listing</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td></tr><tr><td>Approve price changes</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td></tr><tr><td>Book and reschedule viewings</td><td class="center yes">&#10003;</td><td class="center yes">&#10003;</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td></tr><tr><td>See client identity uploads</td><td class="center yes">&#10003;</td><td class="center yes">&#10003;</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td></tr><tr><td>Issue refunds</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center yes">&#10003;</td></tr><tr><td>View revenue and fees</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center yes">&#10003;</td></tr><tr><td>Publish journal pieces</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td></tr><tr><td>Manage roles</td><td class="center yes">&#10003;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td><td class="center no">&mdash;</td></tr></tbody></table></div>
+<p class="cap mt-5">Changes to permissions are logged and take effect at the next sign-in.</p></section></div>
+  </div>
+</div>
+</main>
+
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

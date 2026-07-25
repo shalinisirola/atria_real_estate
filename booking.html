@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a viewing — Atria</title>
+<meta name="description" content="Book a viewing">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <nav class="nav__links" aria-label="Primary"><a class="nav__link" href="index.html">Residences</a><a class="nav__link" href="listings.html" aria-current="page">Collection</a><a class="nav__link" href="agents.html">Advisors</a><a class="nav__link" href="about.html">House</a><a class="nav__link" href="journal.html">Journal</a><a class="nav__link" href="contact.html">Contact</a></nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="login.html"><i data-ic="user" data-size="18"></i>Account</a>
+      <a class="btn btn--secondary btn--sm" href="booking.html">Book a viewing</a>
+      <button class="nav__burger" aria-label="Open menu"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" role="dialog" aria-label="Menu" aria-modal="true">
+  <div class="row" style="justify-content:space-between">
+    <span class="brand__word">Atria</span>
+    <button class="btn btn--ghost" data-close-drawer aria-label="Close menu"><i data-ic="x"></i></button>
+  </div>
+  <nav class="stack mt-8" style="flex:1"><a href="index.html" data-close-drawer>Residences</a><a href="listings.html" data-close-drawer>Collection</a><a href="agents.html" data-close-drawer>Advisors</a><a href="about.html" data-close-drawer>House</a><a href="journal.html" data-close-drawer>Journal</a><a href="contact.html" data-close-drawer>Contact</a></nav>
+  <a class="btn btn--primary btn--block mt-6" href="booking.html">Book a viewing</a>
+</div>
+<main id="main">
+<style>
+.flow{display:grid;grid-template-columns:1fr 380px;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.flow{grid-template-columns:1fr}}
+.flow-head{padding-top:var(--s-9);padding-bottom:var(--s-6);border-bottom:1px solid var(--hairline)}
+.step-pane[hidden]{display:none}
+.summary{border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)}
+.pay-tab{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-3)}
+.pay-opt{border:1px solid var(--hairline);background:var(--white);padding:var(--s-5);cursor:pointer;text-align:left;
+  transition:all var(--fast) var(--ease);display:flex;flex-direction:column;gap:var(--s-3)}
+.pay-opt:hover{border-color:var(--ink)}
+.pay-opt[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.pay-opt i{color:var(--gold-dim)}
+.check-icon{width:80px;height:80px;border:1px solid var(--green);border-radius:50%;display:grid;place-items:center;color:var(--green)}
+.fail-icon{width:80px;height:80px;border:1px solid var(--red);border-radius:50%;display:grid;place-items:center;color:var(--red)}
+.receipt{max-width:760px;margin-inline:auto;background:var(--white);border:1px solid var(--hairline);padding:var(--s-9)}
+@media print{.nav,.foot,.no-print{display:none!important}.receipt{border:0;padding:0}}
+</style>
+<div class="wrap flow-head">
+  <ol class="crumbs"><li><a href="index.html">Home</a></li><li><a href="property.html">Skyline Penthouse 4201</a></li><li aria-current="page">Book a viewing</li></ol>
+  <h1 class="d3 mt-5">Book a private viewing</h1>
+  <div class="mt-7" data-stepbar><div class="steps"><div class="step is-current"><span class="step__n">1</span><span>Residence</span></div><span class="step__line"></span><div class="step "><span class="step__n">2</span><span>Date</span></div><span class="step__line"></span><div class="step "><span class="step__n">3</span><span>Time</span></div><span class="step__line"></span><div class="step "><span class="step__n">4</span><span>Your details</span></div><span class="step__line"></span><div class="step "><span class="step__n">5</span><span>Identity</span></div><span class="step__line"></span><div class="step "><span class="step__n">6</span><span>Confirm</span></div><span class="step__line"></span><div class="step "><span class="step__n">7</span><span>Payment</span></div></div></div>
+</div>
+<section class="wrap" style="padding-block:var(--s-9) var(--s-12)">
+  <div class="flow">
+    <div><section class="step-pane"><h2 class="h1">Which residence?</h2>
+<p class="b2 ink60 mt-3 measure">You are booking a private viewing. Nobody else will be shown the house at the same time.</p>
+<div class="stack gap-5 mt-8">
+  <label class="card row gap-5" style="align-items:center;cursor:pointer">
+    <input type="radio" name="which" checked class="sr">
+    <span class="pf" style="width:120px;flex:none"><span class="plate plate--night ar-1-1" style="display:block"></span></span>
+    <span><span class="h4">Skyline Penthouse 4201</span>
+      <span class="cap" style="display:block">Worli Sea Face, Mumbai · ₹47.5 Cr</span></span>
+    <span class="push badge badge--gold">Selected</span>
+  </label>
+  <label class="card row gap-5" style="align-items:center;cursor:pointer">
+    <span class="pf" style="width:120px;flex:none"><span class="plate plate--tower ar-1-1" style="display:block"></span></span>
+    <span><span class="h4">The Malabar Duplex</span>
+      <span class="cap" style="display:block">Malabar Hill, Mumbai · ₹32.0 Cr</span></span>
+    <span class="push cap">Add to this visit</span>
+  </label>
+</div>
+<div class="card mt-6" style="background:var(--paper-warm)">
+  <p class="h4">Viewing two houses in one morning?</p>
+  <p class="b2 ink60 mt-2">Add the second and Ira will plan the route. The reservation fee is charged once.</p>
+</div><div class="row gap-3 mt-9 wrapline"><span class="push"></span><button class="btn btn--primary" data-go="1">Choose a date<i data-ic="arrow" data-size="18"></i></button></div></section><section class="step-pane" hidden><h2 class="h1">Pick a date</h2>
+<p class="b2 ink60 mt-3">Viewings run Tuesday to Saturday. The owner asks for 24 hours' notice, so today is not available.</p>
+<div class="cols-2 mt-8" style="gap:var(--s-8);align-items:start">
+  <div class="cal" data-cal>
+    <div class="cal__head">
+      <button class="cal__nav" type="button" data-cal-step="-1" aria-label="Previous month"><i data-ic="chevL" data-size="16"></i></button>
+      <p class="h4" data-cal-label>—</p>
+      <button class="cal__nav" type="button" data-cal-step="1" aria-label="Next month"><i data-ic="chevR" data-size="16"></i></button>
+    </div>
+    <div class="cal__grid"></div>
+  </div>
+  <div>
+    <p class="mono-label muted">Legend</p>
+    <div class="stack gap-3 mt-4 b2">
+      <span class="row gap-3"><span style="width:8px;height:8px;background:var(--gold);border-radius:50%"></span>Slots available</span>
+      <span class="row gap-3"><span style="width:8px;height:8px;background:var(--stone-40);border-radius:50%"></span>Fully booked</span>
+      <span class="row gap-3"><span style="width:8px;height:8px;background:var(--hairline);border-radius:50%"></span>Sundays — owner unavailable</span>
+    </div>
+    <p class="cap mt-8">Selected: <strong data-cal-out>choose a date</strong></p>
+  </div>
+</div><div class="row gap-3 mt-9 wrapline"><button class="btn btn--ghost" data-go="0"><i data-ic="arrowL" data-size="18"></i>Back</button><span class="push"></span><button class="btn btn--primary" data-go="2">Choose a time<i data-ic="arrow" data-size="18"></i></button></div></section><section class="step-pane" hidden><h2 class="h1">Pick a time</h2>
+<p class="b2 ink60 mt-3">Forty-five minutes with your advisor. Sunset viewings are worth it in this apartment.</p>
+<p class="mono-label muted mt-8">Morning</p>
+<div class="slots mt-4">
+  <button class="slot" data-one aria-pressed="true">10:00</button>
+  <button class="slot" data-one aria-pressed="false">10:45</button>
+  <button class="slot" disabled>11:30</button>
+  <button class="slot" data-one aria-pressed="false">12:15</button>
+</div>
+<p class="mono-label muted mt-7">Afternoon</p>
+<div class="slots mt-4">
+  <button class="slot" data-one aria-pressed="false">14:00</button>
+  <button class="slot" disabled>14:45</button>
+  <button class="slot" data-one aria-pressed="false">15:30</button>
+  <button class="slot" data-one aria-pressed="false">16:15</button>
+</div>
+<p class="mono-label muted mt-7">Golden hour <span class="badge badge--gold" style="margin-left:8px">Recommended</span></p>
+<div class="slots mt-4">
+  <button class="slot" data-one aria-pressed="false">17:30</button>
+  <button class="slot" data-one aria-pressed="false">18:00</button>
+</div><div class="row gap-3 mt-9 wrapline"><button class="btn btn--ghost" data-go="1"><i data-ic="arrowL" data-size="18"></i>Back</button><span class="push"></span><button class="btn btn--primary" data-go="3">Add your details<i data-ic="arrow" data-size="18"></i></button></div></section><section class="step-pane" hidden><h2 class="h1">Your details</h2>
+<p class="b2 ink60 mt-3">Building security needs the name on your ID. We share nothing else with them.</p>
+<form class="mt-8" style="max-width:640px" onsubmit="return false">
+  <div class="cols-2" style="gap:var(--s-5)">
+    <div class="field"><label class="field__label" for="v1">First name</label><input class="input" id="v1" value="Rukmini" required></div>
+    <div class="field"><label class="field__label" for="v2">Last name</label><input class="input" id="v2" value="Desai" required></div>
+    <div class="field"><label class="field__label" for="v3">Email</label><input class="input" id="v3" type="email" value="r.desai@email.com" required></div>
+    <div class="field"><label class="field__label" for="v4">Mobile</label><input class="input" id="v4" type="tel" value="+91 98200 44412" required></div>
+  </div>
+  <div class="field mt-5"><label class="field__label" for="v5">Visitors, including you</label>
+    <select class="select" id="v5"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+    <p class="field__hint">Architects and family are welcome. Other agents are not.</p></div>
+  <div class="field mt-5"><label class="field__label" for="v6">Anything Ira should know?</label>
+    <textarea class="textarea" id="v6" placeholder="Bringing my architect. Interested in the terrace load-bearing capacity."></textarea></div>
+  <label class="check mt-6"><input type="checkbox" checked><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span>
+    <span class="b2">Send me an SMS reminder two hours before</span></label>
+</form><div class="row gap-3 mt-9 wrapline"><button class="btn btn--ghost" data-go="2"><i data-ic="arrowL" data-size="18"></i>Back</button><span class="push"></span><button class="btn btn--primary" data-go="4">Upload identity<i data-ic="arrow" data-size="18"></i></button></div></section><section class="step-pane" hidden><h2 class="h1">Identity</h2>
+<p class="b2 ink60 mt-3 measure">The society requires photo ID for every visitor to a private residence. Uploads are
+  encrypted, shown to security on the day, and deleted after seventy-two hours.</p>
+<div class="cols-2 mt-8" style="gap:var(--s-6)">
+  <div>
+    <p class="mono-label muted">Visitor 1 — Rukmini Desai</p>
+    <div class="card mt-4 row gap-4" style="align-items:center">
+      <span class="av av--md av--square" style="color:var(--green)"><i data-ic="check" data-size="18"></i></span>
+      <div><p class="h4">Aadhaar (masked)</p><p class="cap">Uploaded 22 July · verified</p></div>
+      <button class="btn btn--ghost btn--sm push">Replace</button>
+    </div>
+  </div>
+  <div>
+    <p class="mono-label muted">Visitor 2</p>
+    <div class="dropzone mt-4">
+      <span class="gold"><i data-ic="download" data-size="24"></i></span>
+      <p class="h4 mt-3">Drop a photo ID here</p>
+      <p class="cap mt-2">Passport, Aadhaar or driving licence. JPG or PDF, under 10 MB.</p>
+      <button class="btn btn--outlined btn--sm mt-5" type="button" onclick="toast('Uploaded','Verifying — usually under a minute.','success')">Choose a file</button>
+    </div>
+  </div>
+</div>
+<div class="card mt-8 row gap-4" style="align-items:flex-start;background:var(--paper-warm)">
+  <span class="gold" style="margin-top:2px"><i data-ic="shield" data-size="20"></i></span>
+  <div><p class="h4">How we handle this</p>
+    <p class="b2 ink60 mt-2">Files are stored encrypted, visible only to the advisor on your file, and deleted
+      automatically seventy-two hours after the viewing. We never send them to the owner.</p></div>
+</div><div class="row gap-3 mt-9 wrapline"><button class="btn btn--ghost" data-go="3"><i data-ic="arrowL" data-size="18"></i>Back</button><span class="push"></span><button class="btn btn--primary" data-go="5">Review<i data-ic="arrow" data-size="18"></i></button></div></section><section class="step-pane" hidden><h2 class="h1">Check it over</h2>
+<p class="b2 ink60 mt-3">Nothing is charged until the next step.</p>
+<div class="card mt-8" style="max-width:640px">
+  <dl>
+    <div class="kv"><dt>Residence</dt><dd>Skyline Penthouse 4201</dd></div>
+    <div class="kv"><dt>Address</dt><dd>Worli Sea Face, Mumbai</dd></div>
+    <div class="kv"><dt>Date</dt><dd>Thursday 30 July 2026</dd></div>
+    <div class="kv"><dt>Time</dt><dd>10:00–10:45</dd></div>
+    <div class="kv"><dt>Visitors</dt><dd>2</dd></div>
+    <div class="kv"><dt>Advisor</dt><dd>Ira Sethna</dd></div>
+    <div class="kv"><dt>Identity</dt><dd>1 of 2 verified</dd></div>
+    <div class="kv"><dt>Reservation fee</dt><dd>₹25,000</dd></div>
+  </dl>
+  <label class="check mt-6"><input type="checkbox" checked><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span>
+    <span class="b2">I have read the viewing terms and the cancellation policy</span></label>
+  <p class="cap mt-4">Free cancellation until 18:00 the day before. After that the fee is retained.</p>
+</div><div class="row gap-3 mt-9 wrapline"><button class="btn btn--ghost" data-go="4"><i data-ic="arrowL" data-size="18"></i>Back</button><span class="push"></span><button class="btn btn--primary" data-go="6">Go to payment<i data-ic="arrow" data-size="18"></i></button></div></section><section class="step-pane" hidden><h2 class="h1">Reservation fee</h2>
+<p class="b2 ink60 mt-3">₹25,000, credited against your token amount if you proceed with the purchase.</p>
+<div class="card mt-8" style="max-width:640px">
+  <div class="row" style="justify-content:space-between"><p class="h4">Amount due now</p><p class="h2 num">₹25,000</p></div>
+  <hr class="mt-5">
+  <p class="cap mt-5">Card, UPI or bank transfer. Handled by our payment gateway — Atria never sees your card number.</p>
+  <a class="btn btn--primary btn--block btn--lg mt-6" href="checkout.html">Continue to payment</a>
+  <a class="btn btn--ghost btn--block mt-3" href="dashboard.html">Save and pay later</a>
+  <p class="cap mt-4 center">Slots held for 30 minutes.</p>
+</div>
+<div class="row gap-3 mt-9"><button class="btn btn--ghost" data-go="5"><i data-ic="arrowL" data-size="18"></i>Back</button></div></section></div>
+    <aside class="sticky-col">
+  <div class="summary">
+    <div class="pf"><div class="plate plate--night ar-3-2"></div></div>
+    <p class="h3 mt-5">Skyline Penthouse 4201</p>
+    <p class="cap mt-2">Worli Sea Face, Mumbai · 42nd floor</p>
+    <dl class="mt-5">
+      <div class="kv"><dt>Guide price</dt><dd>₹47.5 Cr</dd></div>
+      <div class="kv"><dt>Date</dt><dd data-cal-out>Thu 30 July</dd></div>
+      <div class="kv"><dt>Time</dt><dd>10:00–10:45</dd></div>
+      <div class="kv"><dt>Advisor</dt><dd>Ira Sethna</dd></div>
+      <div class="kv"><dt>Reservation fee</dt><dd>₹25,000</dd></div>
+    </dl>
+    <p class="cap mt-5">The fee holds the slot and is credited against your token amount, or refunded within five working
+      days if you do not proceed.</p>
+  </div>
+  <div class="card mt-5" style="background:var(--gold-wash);border-color:#E7D9B9">
+    <p class="h4">Need to talk first?</p>
+    <p class="b2 ink60 mt-2">Ira can call you before you commit to a slot.</p>
+    <a class="link mt-3" href="tel:+912266550117">+91 22 6655 0117 <i data-ic="arrow" data-size="16"></i></a>
+  </div>
+</aside>
+  </div>
+</section>
+<script>window.ATRIA_STEPS=["<div class=\"steps\"><div class=\"step is-current\"><span class=\"step__n\">1</span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">2</span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">3</span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">4</span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">5</span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">6</span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">7</span><span>Payment</span></div></div>", "<div class=\"steps\"><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step is-current\"><span class=\"step__n\">2</span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">3</span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">4</span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">5</span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">6</span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">7</span><span>Payment</span></div></div>", "<div class=\"steps\"><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step is-current\"><span class=\"step__n\">3</span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">4</span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">5</span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">6</span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">7</span><span>Payment</span></div></div>", "<div class=\"steps\"><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step is-current\"><span class=\"step__n\">4</span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">5</span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">6</span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">7</span><span>Payment</span></div></div>", "<div class=\"steps\"><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step is-current\"><span class=\"step__n\">5</span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">6</span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">7</span><span>Payment</span></div></div>", "<div class=\"steps\"><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step is-current\"><span class=\"step__n\">6</span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step \"><span class=\"step__n\">7</span><span>Payment</span></div></div>", "<div class=\"steps\"><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Residence</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Date</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Time</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Your details</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Identity</span></div><span class=\"step__line\"></span><div class=\"step is-done\"><span class=\"step__n\"><svg viewBox=\"0 0 20 20\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 10.6 8 14.5 16 5.8\"/></svg></span><span>Confirm</span></div><span class=\"step__line\"></span><div class=\"step is-current\"><span class=\"step__n\">7</span><span>Payment</span></div></div>"];</script>
+<script>
+(function(){
+  var panes=[].slice.call(document.querySelectorAll('.step-pane'));
+  var bar=document.querySelector('[data-stepbar]');
+  function go(i){
+    panes.forEach(function(p,j){p.hidden=j!==i});
+    if(bar) bar.innerHTML=window.ATRIA_STEPS[i];
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.addEventListener('click',function(e){
+    var n=e.target.closest('[data-go]'); if(!n) return;
+    e.preventDefault(); go(+n.dataset.go);
+  });
+})();
+</script>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <div class="row gap-3"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></div>
+        <p class="lede mt-5" style="max-width:34ch;color:rgba(250,250,247,.66)">Private residential brokerage for architecturally significant homes across India.</p>
+        <form class="mt-6" data-validate data-msg="Subscribed" data-sub="The Atria Journal arrives on the first Thursday of each month." style="max-width:340px">
+          <label class="foot__label" for="nl" style="margin-bottom:8px">The monthly journal</label>
+          <div class="row gap-2">
+            <input class="input" id="nl" type="email" required placeholder="you@email.com" style="background:transparent;border-color:rgba(250,250,247,.28);color:var(--paper)">
+            <button class="btn btn--gold" type="submit" aria-label="Subscribe"><i data-ic="arrow"></i></button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="foot__label">Explore</p>
+        <ul class="stack gap-3">
+          <li><a href="listings.html">The collection</a></li>
+          <li><a href="listings.html#villas">Villas</a></li>
+          <li><a href="listings.html#apartments">Apartments</a></li>
+          <li><a href="listings.html#penthouses">Penthouses</a></li>
+          <li><a href="search.html">Saved searches</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Company</p>
+        <ul class="stack gap-3">
+          <li><a href="about.html">Our house</a></li>
+          <li><a href="agents.html">Advisors</a></li>
+          <li><a href="contact.html">Offices</a></li>
+          <li><a href="contact.html#faq">Questions</a></li>
+          <li><a href="system.html">Design system</a></li>
+          <li><a href="admin.html">Admin console</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <ul class="stack gap-3">
+          <li><a href="tel:+912266550100">+91 22 6655 0100</a></li>
+          <li><a href="mailto:private@atria.house">private@atria.house</a></li>
+          <li><a href="dashboard.html">Client portal</a></li>
+        </ul>
+        <p class="foot__label mt-8">Follow</p>
+        <ul class="stack gap-3">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; 2026 Atria Residential Pvt. Ltd.</span>
+      <span>RERA A52100031204</span>
+      <span class="push"><a href="#">Privacy</a></span>
+      <span><a href="#">Terms</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

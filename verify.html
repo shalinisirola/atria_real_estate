@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirm email — Atria</title>
+<meta name="description" content="Confirm email">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+
+<main id="main">
+<style>
+body{overflow-x:hidden}
+.auth{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.auth__aside{position:relative;background:var(--ink);color:var(--paper);padding:var(--s-8) var(--s-9);
+  display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.auth__aside .plate{position:absolute;inset:0;opacity:.5}
+.auth__aside > *{position:relative;z-index:1}
+.auth__main{display:flex;align-items:center;justify-content:center;padding:var(--s-9) var(--s-7)}
+.auth__form{width:100%;max-width:420px}
+.auth__form--wide{max-width:520px}
+@media(max-width:900px){.auth{grid-template-columns:1fr}.auth__aside{display:none}}
+.social{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3)}
+.divider{display:flex;align-items:center;gap:var(--s-4);color:var(--stone);font-size:var(--t-cap)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--hairline)}
+.check-icon{width:72px;height:72px;border:1px solid var(--green);border-radius:50%;display:grid;place-items:center;color:var(--green)}
+.check-icon svg{animation:pop 620ms var(--ease)}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+</style>
+<section class="auth">
+  <aside class="auth__aside">
+    <div class="plate plate--horizon"></div>
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <div>
+      <p class="quote" style="max-width:26ch">&ldquo;We photograph at 5:40 pm. No sky replacement, ever.&rdquo;</p>
+      <p class="cap mt-6">One rule of the house</p>
+    </div>
+    <div class="row gap-8"><div><p class="h2 num">41</p><p class="stat__l">Residences</p></div><div><p class="h2 num">12</p><p class="stat__l">Off-market</p></div><div><p class="h2 num">28</p><p class="stat__l">Advisors</p></div></div>
+  </aside>
+  <div class="auth__main"><div class="auth__form">
+  <span class="eyebrow">Step 3 of 3</span>
+  <h1 class="d3 mt-4">Confirm your email</h1>
+  <p class="b2 ink60 mt-3">We sent a confirmation link to <strong>r.desai@email.com</strong>. Click it and this page will
+    move on by itself.</p>
+  <div class="progress mt-6"><div class="progress__fill" style="width:90%%"></div></div>
+  <div class="card mt-8 row gap-4" style="align-items:flex-start">
+    <span class="gold" style="margin-top:2px"><i data-ic="mail" data-size="20"></i></span>
+    <div><p class="h4">Waiting for confirmation</p>
+      <p class="b2 ink60 mt-2">The link is valid for 24 hours. You can close this tab — we will pick up where you left off.</p></div>
+  </div>
+  <div class="row gap-3 mt-7 wrapline">
+    <a class="btn btn--primary" href="welcome.html">I have confirmed it</a>
+    <button class="btn btn--outlined" onclick="toast('Email resent','Sent to r.desai@email.com.','success')">Resend email</button>
+  </div>
+  <p class="cap mt-8">Wrong address? <a class="link link--quiet" href="signup.html">Change your email</a></p>
+</div></div>
+</section>
+</main>
+
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private residential brokerage — Atria</title>
+<meta name="description" content="Atria places architecturally significant homes across Mumbai, Delhi, Alibaug and Goa.">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+<style>
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;
+  background:var(--ink);color:var(--paper);padding-bottom:var(--s-11)}
+.hero__bg{position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 78% 12%, rgba(200,169,106,.16) 0%, transparent 58%),
+  linear-gradient(178deg,#161513 0%,#0D0D0C 100%)}
+.hero__bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);background-size:120px;opacity:.16}
+.hero__draw{position:absolute;right:-2%;bottom:12%;width:min(64vw,940px);opacity:.9;pointer-events:none}
+.hero__draw path,.hero__draw line,.hero__draw rect,.hero__draw circle{
+  stroke-dasharray:2400;stroke-dashoffset:2400;animation:draw 2.6s var(--ease) forwards}
+.hero__draw .d2{animation-delay:.32s}.hero__draw .d3{animation-delay:.62s}
+.hero__draw .d4{animation-delay:.94s}.hero__draw text{opacity:0;animation:fadeIn .8s ease 1.5s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+  .hero__draw path,.hero__draw line,.hero__draw rect,.hero__draw circle{stroke-dashoffset:0;animation:none}
+  .hero__draw text{opacity:1;animation:none}}
+.hero__in{position:relative;z-index:2;width:100%}
+.hero__title{max-width:20ch}
+.hero__meta{display:flex;gap:var(--s-8);flex-wrap:wrap;align-items:flex-end}
+.hero__search{margin-top:var(--s-9)}
+.hero__scroll{position:absolute;left:var(--margin);bottom:var(--s-6);z-index:2;
+  font-family:var(--data);font-size:var(--t-mic);letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+@media(max-width:900px){.hero__draw{display:none}.hero{min-height:auto;padding-top:var(--s-12)}}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--hairline)}
+.strip>div{padding:var(--s-8) var(--s-6);border-left:1px solid var(--hairline)}
+.strip>div:first-child{border-left:0;padding-left:0}
+@media(max-width:900px){.strip{grid-template-columns:repeat(2,1fr)}.strip>div:nth-child(3){border-left:0;padding-left:0}}
+.feature{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s-9);align-items:center}
+@media(max-width:900px){.feature{grid-template-columns:1fr}}
+.awards{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.awards>div{padding:var(--s-7);border-left:1px solid rgba(250,250,247,.14)}
+.awards>div:first-child{border-left:0}
+@media(max-width:820px){.awards{grid-template-columns:1fr}.awards>div{border-left:0;border-top:1px solid rgba(250,250,247,.14)}}
+.mosaic{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter)}
+.mosaic .a{grid-column:span 7}.mosaic .b{grid-column:span 5;align-self:end}
+@media(max-width:820px){.mosaic .a,.mosaic .b{grid-column:span 6}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav nav--over">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <nav class="nav__links" aria-label="Primary"><a class="nav__link" href="index.html" aria-current="page">Residences</a><a class="nav__link" href="listings.html">Collection</a><a class="nav__link" href="agents.html">Advisors</a><a class="nav__link" href="about.html">House</a><a class="nav__link" href="journal.html">Journal</a><a class="nav__link" href="contact.html">Contact</a></nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="login.html"><i data-ic="user" data-size="18"></i>Account</a>
+      <a class="btn btn--secondary btn--sm" href="booking.html">Book a viewing</a>
+      <button class="nav__burger" aria-label="Open menu"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" role="dialog" aria-label="Menu" aria-modal="true">
+  <div class="row" style="justify-content:space-between">
+    <span class="brand__word">Atria</span>
+    <button class="btn btn--ghost" data-close-drawer aria-label="Close menu"><i data-ic="x"></i></button>
+  </div>
+  <nav class="stack mt-8" style="flex:1"><a href="index.html" data-close-drawer>Residences</a><a href="listings.html" data-close-drawer>Collection</a><a href="agents.html" data-close-drawer>Advisors</a><a href="about.html" data-close-drawer>House</a><a href="journal.html" data-close-drawer>Journal</a><a href="contact.html" data-close-drawer>Contact</a></nav>
+  <a class="btn btn--primary btn--block mt-6" href="booking.html">Book a viewing</a>
+</div>
+<main id="main">
+
+<section class="hero">
+  <div class="hero__bg"></div>
+  <svg class="hero__draw" viewBox="0 0 940 560" fill="none" aria-hidden="true"
+  stroke="#C8A96A" stroke-width="1" vector-effect="non-scaling-stroke">
+  <g opacity=".95">
+    <path d="M40 470h860"/>
+    <path class="d2" d="M120 470V250h520v220"/>
+    <path class="d2" d="M120 250 380 128l260 122"/>
+    <path class="d3" d="M170 470V318h180v152M170 318h180"/>
+    <path class="d3" d="M410 470V330h180v140M410 330h180M500 330v140"/>
+    <path class="d3" d="M640 470V196h180v274M640 268h180M640 340h180M640 412h180"/>
+    <path class="d4" d="M700 196v274M760 196v274"/>
+    <path class="d4" d="M40 500h300v40H40zM60 520h260"/>
+    <path class="d4" d="M860 470V300M840 300h40M860 300c0-40 20-60 20-60"/>
+    <circle class="d4" cx="860" cy="276" r="34"/>
+  </g>
+  <g stroke-width=".75" opacity=".8">
+    <path class="d4" d="M120 512v28M640 512v28M120 526h520"/>
+    <path class="d4" d="M114 526h12M634 526h12"/>
+    <path class="d4" d="M900 196v274M894 196h12M894 470h12"/>
+  </g>
+  <g fill="#C8A96A" stroke="none" font-family="Inter, sans-serif" font-size="11" letter-spacing="1.6">
+    <text x="336" y="548">8 200 SQ FT</text>
+    <text x="906" y="336" transform="rotate(-90 906 336)">14.4 M</text>
+    <text x="46" y="492">POOL 22 M</text>
+  </g>
+</svg>
+  <div class="wrap hero__in">
+    <span class="eyebrow">Private residential brokerage &middot; Mumbai, Delhi, Goa</span>
+    <h1 class="d1 hero__title mt-6">Homes that were drawn<br>before they were sold.</h1>
+    <div class="hero__meta mt-6">
+      <p class="lede measure-s" style="color:rgba(250,250,247,.72)">
+        Forty-one residences on our books this quarter. Each one measured, photographed and floor-planned by us —
+        never by the developer.</p>
+      <a class="link" href="listings.html" style="color:var(--gold)">See the current
+        <span class="type-swap" data-words="villas|penthouses|apartments|bungalows">villas</span>
+        <i data-ic="arrow" data-size="18"></i></a>
+    </div>
+    <div class="hero__search"><form class="searchbar" data-validate data-msg="Searching the collection" data-sub="Nine residences match your brief." data-success="listings.html">
+  <div class="searchbar__cell">
+    <label for="q">Where</label>
+    <input id="q" placeholder="Alibaug, Malabar Hill, Assagao…">
+  </div>
+  <div class="searchbar__cell">
+    <label for="k">Type</label>
+    <select id="k"><option>Any residence</option><option>Villa</option><option>Apartment</option><option>Penthouse</option><option>Bungalow</option></select>
+  </div>
+  <div class="searchbar__cell">
+    <label for="b">Budget</label>
+    <select id="b"><option>No limit</option><option>Up to ₹10 Cr</option><option>₹10–25 Cr</option><option>₹25–50 Cr</option><option>₹50 Cr +</option></select>
+  </div>
+  <button class="btn btn--gold searchbar__go" type="submit"><i data-ic="search" data-size="18"></i>Search</button>
+</form></div>
+  </div>
+</section>
+
+<section class="wrap section--flush">
+  <div class="strip">
+    <div><p class="stat__k num">41</p><p class="stat__l">On the books</p></div>
+    <div><p class="stat__k num">₹9,340<span style="font-size:.4em;letter-spacing:0"> Cr</span></p><p class="stat__l">Placed since 1997</p></div>
+    <div><p class="stat__k num">28</p><p class="stat__l">Advisors, six cities</p></div>
+    <div><p class="stat__k num">61<span style="font-size:.4em;letter-spacing:0"> days</span></p><p class="stat__l">Median time to close</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap feature">
+    <div class="rv">
+      <span class="eyebrow">How we work</span>
+      <h2 class="d2 mt-5" style="max-width:22ch">We survey the house first. The listing comes second.</h2>
+      <p class="lede mt-6 measure">Every residence on Atria is visited twice before it appears here — once with a
+        tape measure and once with a camera. You get the real ceiling height, the real carpet area, and the drawings
+        to check them against.</p>
+      <div class="cols-2 mt-8" style="gap:var(--s-8)">
+        <div>
+          <p class="h4">Measured, not marketed</p>
+          <p class="b2 ink60 mt-2">Carpet, built-up and terrace areas listed separately. RERA number on every page.</p>
+        </div>
+        <div>
+          <p class="h4">One advisor, start to keys</p>
+          <p class="b2 ink60 mt-2">The person who shows you the house negotiates it and closes it. No handoffs.</p>
+        </div>
+      </div>
+      <a class="btn btn--secondary mt-8" href="about.html">Read our house rules</a>
+    </div>
+    <div class="rv rv-d2">
+      <div class="pf"><div class="plate plate--light ar-4-5"></div></div>
+      <div class="dimline mt-4"><span class="mono-label">Ceiling</span><span class="dimline__bar"></span><span class="mono-label num">3.7 m</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="villas">
+  <div class="wrap">
+    <div class="row wrapline gap-5" style="align-items:flex-end;justify-content:space-between">
+      <div>
+        <span class="eyebrow">01 / Villas</span>
+        <h2 class="d3 mt-4" style="max-width:16ch">Villas, coast and hill</h2>
+      </div>
+      <a class="link" href="listings.html">All 7 in this category <i data-ic="arrow" data-size="18"></i></a>
+    </div>
+    <div class="cols-3 mt-9"><a class="prop rv rv-d1" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Villa Anantara to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--horizon ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Villa Anantara</h3>
+    <span class="prop__price">₹18.4 Cr</span>
+  </div>
+  <p class="prop__loc">Awas Beach, Alibaug &middot; Sea-facing, 1.2-acre plot</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>8,200 sq ft</span>
+  </div>
+</a><a class="prop rv rv-d2" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Casa Assagao to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--court ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Casa Assagao</h3>
+    <span class="prop__price">₹9.6 Cr</span>
+  </div>
+  <p class="prop__loc">Assagao, North Goa &middot; Restored Portuguese courtyard house</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,300 sq ft</span>
+  </div>
+</a><a class="prop rv rv-d3" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Ridge House to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--slab ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Ridge House</h3>
+    <span class="prop__price">₹7.2 Cr</span>
+  </div>
+  <p class="prop__loc">Kasauli, Himachal &middot; Cantilevered over a deodar slope</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>3 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>3 bath</span>
+    <span><i data-ic="area" data-size="16"></i>4,800 sq ft</span>
+  </div>
+</a></div>
+  </div>
+</section>
+
+<section class="section--flush">
+  <div class="wrap">
+    <div class="mosaic">
+      <div class="a rv">
+        <div class="pf"><div class="plate plate--night ar-16-9"></div></div>
+        <p class="cap mt-4">Skyline Penthouse 4201 &middot; Worli Sea Face, Mumbai</p>
+      </div>
+      <div class="b rv rv-d2">
+        <blockquote class="quote">&ldquo;They sent a floor plan with the ceiling heights marked before I even asked. That is when I stopped calling other brokers.&rdquo;</blockquote>
+        <p class="cap mt-5">Rukmini Desai &middot; bought in Worli, 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="apartments">
+  <div class="wrap">
+    <div class="row wrapline gap-5" style="align-items:flex-end;justify-content:space-between">
+      <div>
+        <span class="eyebrow">02 / Apartments</span>
+        <h2 class="d3 mt-4" style="max-width:16ch">Apartments in the old city</h2>
+      </div>
+      <a class="link" href="listings.html">All 7 in this category <i data-ic="arrow" data-size="18"></i></a>
+    </div>
+    <div class="cols-3 mt-9"><a class="prop rv rv-d1" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Exclusive</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Malabar Duplex to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--tower ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Malabar Duplex</h3>
+    <span class="prop__price">₹32.0 Cr</span>
+  </div>
+  <p class="prop__loc">Malabar Hill, Mumbai &middot; Two floors, private lift lobby</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,400 sq ft</span>
+  </div>
+</a><a class="prop rv rv-d2" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bandra Terraces 1801 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--stair ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Bandra Terraces 1801</h3>
+    <span class="prop__price">₹14.2 Cr</span>
+  </div>
+  <p class="prop__loc">Bandra West, Mumbai &middot; Double-height living volume</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>3 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>3 bath</span>
+    <span><i data-ic="area" data-size="16"></i>3,600 sq ft</span>
+  </div>
+</a><a class="prop rv rv-d3" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Tea Estate Residence to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--light ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Tea Estate Residence</h3>
+    <span class="prop__price">₹6.4 Cr</span>
+  </div>
+  <p class="prop__loc">Coonoor, Nilgiris &middot; Nine acres of working estate</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,100 sq ft</span>
+  </div>
+</a></div>
+  </div>
+</section>
+<section class="section" id="penthouses">
+  <div class="wrap">
+    <div class="row wrapline gap-5" style="align-items:flex-end;justify-content:space-between">
+      <div>
+        <span class="eyebrow">03 / Penthouses</span>
+        <h2 class="d3 mt-4" style="max-width:16ch">Penthouses, top floor only</h2>
+      </div>
+      <a class="link" href="listings.html">All 7 in this category <i data-ic="arrow" data-size="18"></i></a>
+    </div>
+    <div class="cols-3 mt-9"><a class="prop rv rv-d1" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--night ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Skyline Penthouse 4201</h3>
+    <span class="prop__price">₹47.5 Cr</span>
+  </div>
+  <p class="prop__loc">Worli Sea Face, Mumbai &middot; 42nd floor, 270° water views</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>9,100 sq ft</span>
+  </div>
+</a><a class="prop rv rv-d2" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Palm Court Penthouse to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--pool ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Palm Court Penthouse</h3>
+    <span class="prop__price">₹26.8 Cr</span>
+  </div>
+  <p class="prop__loc">Juhu, Mumbai &middot; Rooftop pool and orchard deck</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,900 sq ft</span>
+  </div>
+</a><a class="prop rv rv-d3" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Private</span><span class="badge">Bungalow</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bungalow Twelve to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--portal ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Bungalow Twelve</h3>
+    <span class="prop__price">₹92.0 Cr</span>
+  </div>
+  <p class="prop__loc">Prithviraj Road, New Delhi &middot; Lutyens zone, shown on request</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>6 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>7 bath</span>
+    <span><i data-ic="area" data-size="16"></i>14,000 sq ft</span>
+  </div>
+</a></div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <span class="eyebrow">Recognition</span>
+    <h2 class="d3 mt-5" style="max-width:20ch">Judged on the work, not the volume.</h2>
+    <div class="awards mt-10">
+      <div><p class="mono-label gold">2025</p><p class="h3 mt-4">Boutique Brokerage of the Year</p><p class="cap mt-3">Property Report Awards, India</p></div>
+      <div><p class="mono-label gold">2024</p><p class="h3 mt-4">Best Residential Marketing</p><p class="cap mt-3">Indian Realty Excellence</p></div>
+      <div><p class="mono-label gold">2023</p><p class="h3 mt-4">Transparency in Listings</p><p class="cap mt-3">CREDAI Recognition</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">Clients</span>
+    <div class="cols-3 mt-9">
+      <figure class="rv">
+        <span class="gold"><i data-ic="quote" data-size="24"></i></span>
+        <blockquote class="mt-5" style="font-size:1.125rem;line-height:1.6">Ira found the Malabar duplex two weeks before it went to market and talked me out of the first one I loved. The second was right.</blockquote>
+        <figcaption class="row gap-4 mt-6"><span class="av av--sm">RD</span><span class="cap">Rukmini Desai · Mumbai</span></figcaption>
+      </figure>
+      <figure class="rv rv-d2">
+        <span class="gold"><i data-ic="quote" data-size="24"></i></span>
+        <blockquote class="mt-5" style="font-size:1.125rem;line-height:1.6">We were buying from Singapore. Every drawing, title document and site video arrived in the portal before we asked for it.</blockquote>
+        <figcaption class="row gap-4 mt-6"><span class="av av--sm">AT</span><span class="cap">Arvind &amp; Tara Menon · Alibaug</span></figcaption>
+      </figure>
+      <figure class="rv rv-d3">
+        <span class="gold"><i data-ic="quote" data-size="24"></i></span>
+        <blockquote class="mt-5" style="font-size:1.125rem;line-height:1.6">Sold our Assagao house in fifty-three days at the number we wanted. No open houses, no billboards, no noise.</blockquote>
+        <figcaption class="row gap-4 mt-6"><span class="av av--sm">FN</span><span class="cap">Farhan Noorani · Goa</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="wrap">
+    <p class="mono-label muted center">Working with</p>
+    <div class="marq mt-6"><div class="marq__t">
+      <span class="partner">Sotheby's Interiors</span><span class="partner">Aman Residences</span><span class="partner">Studio Mumbai</span><span class="partner">Bentley Home</span><span class="partner">Kohler Signature</span><span class="partner">Gaggenau</span><span class="partner">Christie's</span><span class="partner">Rolls-Royce Bombay</span><span class="partner">Sotheby's Interiors</span><span class="partner">Aman Residences</span><span class="partner">Studio Mumbai</span><span class="partner">Bentley Home</span><span class="partner">Kohler Signature</span><span class="partner">Gaggenau</span><span class="partner">Christie's</span><span class="partner">Rolls-Royce Bombay</span>
+    </div></div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap center stack" style="align-items:center">
+    <span class="eyebrow">Private register</span>
+    <h2 class="d2 mt-6" style="max-width:24ch">Twelve residences are never published. Ask to see those.</h2>
+    <p class="lede mt-6 measure-s" style="margin-inline:auto">Off-market homes are shown to registered clients only, by
+      appointment, with the owner's consent.</p>
+    <div class="row gap-4 mt-8 wrapline" style="justify-content:center">
+      <a class="btn btn--primary" href="signup.html">Register your brief</a>
+      <a class="btn btn--secondary" href="booking.html">Book a viewing</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <div class="row gap-3"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></div>
+        <p class="lede mt-5" style="max-width:34ch;color:rgba(250,250,247,.66)">Private residential brokerage for architecturally significant homes across India.</p>
+        <form class="mt-6" data-validate data-msg="Subscribed" data-sub="The Atria Journal arrives on the first Thursday of each month." style="max-width:340px">
+          <label class="foot__label" for="nl" style="margin-bottom:8px">The monthly journal</label>
+          <div class="row gap-2">
+            <input class="input" id="nl" type="email" required placeholder="you@email.com" style="background:transparent;border-color:rgba(250,250,247,.28);color:var(--paper)">
+            <button class="btn btn--gold" type="submit" aria-label="Subscribe"><i data-ic="arrow"></i></button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="foot__label">Explore</p>
+        <ul class="stack gap-3">
+          <li><a href="listings.html">The collection</a></li>
+          <li><a href="listings.html#villas">Villas</a></li>
+          <li><a href="listings.html#apartments">Apartments</a></li>
+          <li><a href="listings.html#penthouses">Penthouses</a></li>
+          <li><a href="search.html">Saved searches</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Company</p>
+        <ul class="stack gap-3">
+          <li><a href="about.html">Our house</a></li>
+          <li><a href="agents.html">Advisors</a></li>
+          <li><a href="contact.html">Offices</a></li>
+          <li><a href="contact.html#faq">Questions</a></li>
+          <li><a href="system.html">Design system</a></li>
+          <li><a href="admin.html">Admin console</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <ul class="stack gap-3">
+          <li><a href="tel:+912266550100">+91 22 6655 0100</a></li>
+          <li><a href="mailto:private@atria.house">private@atria.house</a></li>
+          <li><a href="dashboard.html">Client portal</a></li>
+        </ul>
+        <p class="foot__label mt-8">Follow</p>
+        <ul class="stack gap-3">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; 2026 Atria Residential Pvt. Ltd.</span>
+      <span>RERA A52100031204</span>
+      <span class="push"><a href="#">Privacy</a></span>
+      <span><a href="#">Terms</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

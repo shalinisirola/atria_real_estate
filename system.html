@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system — Atria</title>
+<meta name="description" content="Tokens, components and states behind the Atria brokerage interface.">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <nav class="nav__links" aria-label="Primary"><a class="nav__link" href="index.html">Residences</a><a class="nav__link" href="listings.html">Collection</a><a class="nav__link" href="agents.html">Advisors</a><a class="nav__link" href="about.html">House</a><a class="nav__link" href="journal.html">Journal</a><a class="nav__link" href="contact.html">Contact</a></nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="login.html"><i data-ic="user" data-size="18"></i>Account</a>
+      <a class="btn btn--secondary btn--sm" href="booking.html">Book a viewing</a>
+      <button class="nav__burger" aria-label="Open menu"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" role="dialog" aria-label="Menu" aria-modal="true">
+  <div class="row" style="justify-content:space-between">
+    <span class="brand__word">Atria</span>
+    <button class="btn btn--ghost" data-close-drawer aria-label="Close menu"><i data-ic="x"></i></button>
+  </div>
+  <nav class="stack mt-8" style="flex:1"><a href="index.html" data-close-drawer>Residences</a><a href="listings.html" data-close-drawer>Collection</a><a href="agents.html" data-close-drawer>Advisors</a><a href="about.html" data-close-drawer>House</a><a href="journal.html" data-close-drawer>Journal</a><a href="contact.html" data-close-drawer>Contact</a></nav>
+  <a class="btn btn--primary btn--block mt-6" href="booking.html">Book a viewing</a>
+</div>
+<main id="main">
+<style>
+.sys{display:grid;grid-template-columns:220px 1fr;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.sys{grid-template-columns:1fr}}
+.sys-nav{position:sticky;top:104px;display:flex;flex-direction:column;gap:2px}
+.sys-nav a{font-size:var(--t-b2);color:var(--stone);padding:6px 0}
+.sys-nav a:hover{color:var(--ink)}
+.sec{padding-top:var(--s-10);border-top:1px solid var(--hairline);margin-top:var(--s-10)}
+.sec:first-child{border-top:0;margin-top:0;padding-top:0}
+.spec{font-family:var(--data);font-size:var(--t-mic);letter-spacing:.1em;color:var(--stone);text-transform:uppercase}
+.swatch{border:1px solid var(--hairline);background:var(--white)}
+.swatch__chip{height:96px}
+.swatch__meta{padding:var(--s-3) var(--s-4)}
+.demo{border:1px solid var(--hairline);background:var(--white);padding:var(--s-6);display:flex;
+  flex-wrap:wrap;gap:var(--s-4);align-items:center}
+.demo--stack{flex-direction:column;align-items:stretch}
+.demo--grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.tok{display:grid;grid-template-columns:120px 90px 1fr;gap:var(--s-4);padding:var(--s-3) 0;
+  border-bottom:1px solid var(--hairline);align-items:center;font-size:var(--t-b2)}
+.bar-vis{height:12px;background:var(--ink)}
+.type-row{display:grid;grid-template-columns:150px 1fr;gap:var(--s-5);padding:var(--s-5) 0;
+  border-bottom:1px solid var(--hairline);align-items:baseline}
+@media(max-width:720px){.type-row,.tok{grid-template-columns:1fr;gap:var(--s-2)}}
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:var(--s-4)}
+.icon-cell{border:1px solid var(--hairline);background:var(--white);padding:var(--s-4);text-align:center}
+.icon-cell span{display:block;margin-top:var(--s-3);font-family:var(--data);font-size:9px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
+.grid-demo{position:relative;height:180px;border:1px solid var(--hairline);background:var(--white);overflow:hidden}
+.grid-demo__cols{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:0 40px}
+.grid-demo__cols span{background:rgba(200,169,106,.18);border-left:1px solid rgba(200,169,106,.5);border-right:1px solid rgba(200,169,106,.5)}
+</style>
+<div class="wrap" style="padding-top:var(--s-10)">
+  <ol class="crumbs"><li><a href="index.html">Home</a></li><li aria-current="page">Design system</li></ol>
+  <div class="row wrapline gap-6 mt-6" style="justify-content:space-between;align-items:flex-end">
+    <div>
+      <span class="eyebrow">Atria · v1.0 · July 2026</span>
+      <h1 class="d2 mt-5" style="max-width:22ch">The system, drawn out</h1>
+      <p class="lede mt-6 measure">Tokens, components and states for the Atria brokerage. Built to the same rule as the
+        listings: measured first, decorated never.</p>
+    </div>
+    <div class="stack gap-3">
+      <span class="badge badge--gold">27 sections</span>
+      <span class="badge">64 components</span>
+      <span class="badge">8-point spacing</span>
+    </div>
+  </div>
+</div>
+
+<section class="wrap" style="padding-block:var(--s-10) var(--s-13)">
+  <div class="sys">
+    <nav class="sys-nav" aria-label="Design system sections"><a href="#foundations">Foundations</a><a href="#colour">Colour</a><a href="#type">Typography</a><a href="#space">Spacing & radius</a><a href="#grid">Grid</a><a href="#plates">Imagery & plan marks</a><a href="#buttons">Buttons</a><a href="#inputs">Inputs</a><a href="#choice">Choice controls</a><a href="#badges">Badges & chips</a><a href="#cards">Cards</a><a href="#prop">Property cards</a><a href="#price">Price cards</a><a href="#avatars">Avatars</a><a href="#nav">Navigation</a><a href="#tabs">Tabs & segments</a><a href="#pager">Pagination</a><a href="#tables">Tables</a><a href="#charts">Charts</a><a href="#cal">Calendar & date</a><a href="#steps">Steppers & progress</a><a href="#feedback">Toasts, modals, accordions</a><a href="#skeleton">Loading & empty</a><a href="#icons">Icons</a><a href="#a11y">Accessibility</a><a href="#responsive">Responsive</a><a href="#naming">Naming & tokens</a></nav>
+    <div>
+
+      <div class="sec" id="foundations">
+        <span class="eyebrow">01</span><h2 class="d3 mt-4">Foundations</h2>
+        <p class="lede mt-5 measure">Three rules hold the whole thing together.</p>
+        <div class="cols-3 mt-8">
+          <div><p class="h3">Hairlines, not shadows</p><p class="b2 ink60 mt-3">Structure comes from 1px rules at
+            #E4E0D8. Elevation exists only for things that float above the page — modals, toasts, the search bar.</p></div>
+          <div><p class="h3">Gold is punctuation</p><p class="b2 ink60 mt-3">The accent appears as plan marks, one
+            primary action per view, and status. If two gold things compete in a frame, one is wrong.</p></div>
+          <div><p class="h3">Space is the luxury</p><p class="b2 ink60 mt-3">Sections breathe at 128–160px. Nothing is
+            allowed to fill a gap that was left deliberately.</p></div>
+        </div>
+      </div>
+
+      <div class="sec" id="colour">
+        <span class="eyebrow">02</span><h2 class="d3 mt-4">Colour</h2>
+        <p class="b2 ink60 mt-4 measure">Fourteen values, three of them semantic. Ink on paper is 15.9:1. Gold dim on
+          paper is 4.6:1 — the light gold is never used for text.</p>
+        <div class="demo--grid mt-8" style="gap:var(--s-4)"><div class="swatch"><div class="swatch__chip" style="background:#111111"></div><div class="swatch__meta"><p class="h4">Ink</p><p class="spec mt-2">#111111 · var(--ink)</p><p class="cap mt-2">Primary. Text, buttons, dark sections.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#2B2B29"></div><div class="swatch__meta"><p class="h4">Ink 80</p><p class="spec mt-2">#2B2B29 · var(--ink-80)</p><p class="cap mt-2">Hover on dark surfaces.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#4E4C48"></div><div class="swatch__meta"><p class="h4">Ink 60</p><p class="spec mt-2">#4E4C48 · var(--ink-60)</p><p class="cap mt-2">Body copy in long form.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#8A867E"></div><div class="swatch__meta"><p class="h4">Stone</p><p class="spec mt-2">#8A867E · var(--stone)</p><p class="cap mt-2">Captions, labels, metadata.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#B6B2A9"></div><div class="swatch__meta"><p class="h4">Stone 40</p><p class="spec mt-2">#B6B2A9 · var(--stone-40)</p><p class="cap mt-2">Placeholders, disabled.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#E4E0D8"></div><div class="swatch__meta"><p class="h4">Hairline</p><p class="spec mt-2">#E4E0D8 · var(--hairline)</p><p class="cap mt-2">Every rule and border. 1px only.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#FAFAF7"></div><div class="swatch__meta"><p class="h4">Paper</p><p class="spec mt-2">#FAFAF7 · var(--paper)</p><p class="cap mt-2">Page background.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#F2EFE8"></div><div class="swatch__meta"><p class="h4">Paper warm</p><p class="spec mt-2">#F2EFE8 · var(--paper-warm)</p><p class="cap mt-2">Alternate section band.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__meta"><p class="h4">White</p><p class="spec mt-2">#FFFFFF · var(--white)</p><p class="cap mt-2">Cards, inputs, tables.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#C8A96A"></div><div class="swatch__meta"><p class="h4">Gold</p><p class="spec mt-2">#C8A96A · var(--gold)</p><p class="cap mt-2">Accent. Plan marks, one CTA per view.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#A8894C"></div><div class="swatch__meta"><p class="h4">Gold dim</p><p class="spec mt-2">#A8894C · var(--gold-dim)</p><p class="cap mt-2">Gold on light — passes AA on paper.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#3F6B52"></div><div class="swatch__meta"><p class="h4">Green</p><p class="spec mt-2">#3F6B52 · var(--green)</p><p class="cap mt-2">Success, verified, paid.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#B4544A"></div><div class="swatch__meta"><p class="h4">Red</p><p class="spec mt-2">#B4544A · var(--red)</p><p class="cap mt-2">Error, declined, destructive.</p></div></div><div class="swatch"><div class="swatch__chip" style="background:#9A7B3A"></div><div class="swatch__meta"><p class="h4">Amber</p><p class="spec mt-2">#9A7B3A · var(--amber)</p><p class="cap mt-2">Warning, awaiting action.</p></div></div></div>
+      </div>
+
+      <div class="sec" id="type">
+        <span class="eyebrow">03</span><h2 class="d3 mt-4">Typography</h2>
+        <p class="b2 ink60 mt-4 measure">Satoshi for display, General Sans for body and interface, Inter for anything
+          numeric so figures align in tables and price columns.</p>
+        <div class="mt-8"><div class="type-row"><div><p class="h4">Display 1</p><p class="spec mt-2">Satoshi Light · 104/100 · −3.5%</p></div><p class="d1">Homes that were drawn</p></div><div class="type-row"><div><p class="h4">Display 2</p><p class="spec mt-2">Satoshi Light · 72/69 · −3.5%</p></div><p class="d2">The collection</p></div><div class="type-row"><div><p class="h4">Display 3</p><p class="spec mt-2">Satoshi Light · 52/53 · −3%</p></div><p class="d3">Book a private viewing</p></div><div class="type-row"><div><p class="h4">Heading 1</p><p class="spec mt-2">Satoshi Regular · 40/44</p></div><p class="h1">Which residence?</p></div><div class="type-row"><div><p class="h4">Heading 2</p><p class="spec mt-2">Satoshi Regular · 28/34</p></div><p class="h2">Floor plans</p></div><div class="type-row"><div><p class="h4">Heading 3</p><p class="spec mt-2">Satoshi Medium · 22/29</p></div><p class="h3">Villa Anantara</p></div><div class="type-row"><div><p class="h4">Heading 4</p><p class="spec mt-2">General Sans Medium · 18/25</p></div><p class="h4">Measured, not marketed</p></div><div class="type-row"><div><p class="h4">Lede</p><p class="spec mt-2">General Sans Light · 20/31</p></div><p class="lede">Forty-one residences on our books this quarter.</p></div><div class="type-row"><div><p class="h4">Body</p><p class="spec mt-2">General Sans Regular · 17/27</p></div><p class="body">Every residence is visited twice before it appears here.</p></div><div class="type-row"><div><p class="h4">Body small</p><p class="spec mt-2">General Sans Regular · 15/24</p></div><p class="b2">Carpet, built-up and terrace areas listed separately.</p></div><div class="type-row"><div><p class="h4">Caption</p><p class="spec mt-2">General Sans Regular · 13/20</p></div><p class="cap">Worli Sea Face, Mumbai · 42nd floor</p></div><div class="type-row"><div><p class="h4">Data / tabular</p><p class="spec mt-2">Inter Regular · tabular figures</p></div><p class="num">₹47,50,00,000 · 9,100 sq ft · 3.7 m</p></div><div class="type-row"><div><p class="h4">Micro label</p><p class="spec mt-2">Inter Medium · 11 · +16% tracking</p></div><p class="mono-label">Guide price</p></div></div>
+      </div>
+
+      <div class="sec" id="space">
+        <span class="eyebrow">04</span><h2 class="d3 mt-4">Spacing &amp; radius</h2>
+        <p class="b2 ink60 mt-4 measure">Everything is a multiple of 8, with a single 4px step for tight pairs.</p>
+        <div class="mt-8"><div class="tok"><code class="spec">--s-1</code><span class="num cap">4px</span><span class="bar-vis" style="width:4px"></span></div><div class="tok"><code class="spec">--s-2</code><span class="num cap">8px</span><span class="bar-vis" style="width:8px"></span></div><div class="tok"><code class="spec">--s-3</code><span class="num cap">12px</span><span class="bar-vis" style="width:12px"></span></div><div class="tok"><code class="spec">--s-4</code><span class="num cap">16px</span><span class="bar-vis" style="width:16px"></span></div><div class="tok"><code class="spec">--s-5</code><span class="num cap">24px</span><span class="bar-vis" style="width:24px"></span></div><div class="tok"><code class="spec">--s-6</code><span class="num cap">32px</span><span class="bar-vis" style="width:32px"></span></div><div class="tok"><code class="spec">--s-7</code><span class="num cap">40px</span><span class="bar-vis" style="width:40px"></span></div><div class="tok"><code class="spec">--s-8</code><span class="num cap">48px</span><span class="bar-vis" style="width:48px"></span></div><div class="tok"><code class="spec">--s-9</code><span class="num cap">64px</span><span class="bar-vis" style="width:64px"></span></div><div class="tok"><code class="spec">--s-10</code><span class="num cap">80px</span><span class="bar-vis" style="width:80px"></span></div><div class="tok"><code class="spec">--s-11</code><span class="num cap">96px</span><span class="bar-vis" style="width:96px"></span></div><div class="tok"><code class="spec">--s-12</code><span class="num cap">128px</span><span class="bar-vis" style="width:128px"></span></div><div class="tok"><code class="spec">--s-13</code><span class="num cap">160px</span><span class="bar-vis" style="width:160px"></span></div></div>
+        <p class="h3 mt-9">Radius</p>
+        <div class="demo mt-4">
+          <div><div style="width:88px;height:56px;background:var(--ink);border-radius:0"></div><p class="spec mt-3">0 · plates, sections</p></div>
+          <div><div style="width:88px;height:56px;background:var(--ink);border-radius:2px"></div><p class="spec mt-3">2 · buttons, inputs</p></div>
+          <div><div style="width:88px;height:56px;background:var(--ink);border-radius:4px"></div><p class="spec mt-3">4 · rare</p></div>
+          <div><div style="width:88px;height:56px;background:var(--ink);border-radius:999px"></div><p class="spec mt-3">Full · chips, avatars</p></div>
+        </div>
+      </div>
+
+      <div class="sec" id="grid">
+        <span class="eyebrow">05</span><h2 class="d3 mt-4">Grid</h2>
+        <p class="b2 ink60 mt-4 measure">1440 frame, 12 columns, 24px gutters, 80px margins. Tablet drops to 40px
+          margins, mobile to 6 columns and 20px margins.</p>
+        <div class="grid-demo mt-8">
+          <div class="grid-demo__cols"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="cols-3 mt-6">
+          <div><p class="spec">Desktop</p><p class="b2 mt-2">1440 · 12 col · 24 gutter · 80 margin</p></div>
+          <div><p class="spec">Tablet</p><p class="b2 mt-2">1024 · 12 col · 24 gutter · 40 margin</p></div>
+          <div><p class="spec">Mobile</p><p class="b2 mt-2">390 · 6 col · 16 gutter · 20 margin</p></div>
+        </div>
+      </div>
+
+      <div class="sec" id="plates">
+        <span class="eyebrow">06</span><h2 class="d3 mt-4">Imagery &amp; plan marks</h2>
+        <p class="b2 ink60 mt-4 measure">Photography slots are called plates. Each one carries two gold corner ticks
+          that grow on hover — the signature of the system, borrowed from the drawings we publish with every residence.
+          Dimension lines carry a real measurement, never a decorative one.</p>
+        <div class="cols-4 mt-8">
+          <div><div class="pf"><div class="plate plate--tower ar-4-3"></div></div><p class="spec mt-3">plate--tower</p></div>
+          <div><div class="pf"><div class="plate plate--horizon ar-4-3"></div></div><p class="spec mt-3">plate--horizon</p></div>
+          <div><div class="pf"><div class="plate plate--night ar-4-3"></div></div><p class="spec mt-3">plate--night</p></div>
+          <div><div class="pf"><div class="plate plate--court ar-4-3"></div></div><p class="spec mt-3">plate--court</p></div>
+          <div><div class="pf"><div class="plate plate--portal ar-4-3"></div></div><p class="spec mt-3">plate--portal</p></div>
+          <div><div class="pf"><div class="plate plate--slab ar-4-3"></div></div><p class="spec mt-3">plate--slab</p></div>
+          <div><div class="pf"><div class="plate plate--stair ar-4-3"></div></div><p class="spec mt-3">plate--stair</p></div>
+          <div><div class="pf"><div class="plate plate--pool ar-4-3"></div></div><p class="spec mt-3">plate--pool</p></div>
+        </div>
+        <div class="demo demo--stack mt-6">
+          <div class="dimline"><span class="mono-label">Ceiling</span><span class="dimline__bar"></span><span class="mono-label num">3.7 m</span></div>
+          <div class="dimline"><span class="mono-label">Carpet area</span><span class="dimline__bar"></span><span class="mono-label num">9,100 sq ft</span></div>
+        </div>
+      </div>
+
+      <div class="sec" id="buttons">
+        <span class="eyebrow">07</span><h2 class="d3 mt-4">Buttons</h2>
+        <p class="b2 ink60 mt-4 measure">Five variants, three sizes, six states. Every button ripples from the point of
+          contact unless reduced motion is set.</p>
+        <div class="demo mt-8">
+          <button class="btn btn--primary">Book a viewing</button>
+          <button class="btn btn--secondary">Message Ira</button>
+          <button class="btn btn--outlined">Download brochure</button>
+          <button class="btn btn--ghost">Share</button>
+          <button class="btn btn--gold">Search</button>
+          <button class="btn btn--danger">Cancel viewing</button>
+        </div>
+        <div class="demo mt-4">
+          <button class="btn btn--primary btn--lg">Large</button>
+          <button class="btn btn--primary">Default</button>
+          <button class="btn btn--primary btn--sm">Small</button>
+          <button class="btn btn--primary is-loading">Loading</button>
+          <button class="btn btn--primary" disabled>Disabled</button>
+          <button class="btn btn--primary" style="outline:2px solid var(--gold-dim);outline-offset:3px">Focus ring</button>
+        </div>
+        <div class="demo mt-4" style="background:var(--ink)">
+          <button class="btn btn--primary" style="--bg:var(--paper);--fg:var(--ink);--bd:var(--paper)">On dark</button>
+          <button class="btn btn--secondary" style="--fg:var(--paper);--bd:rgba(250,250,247,.4)">On dark</button>
+          <button class="btn btn--gold">On dark</button>
+        </div>
+        <div class="demo mt-4"><p class="spec">Floating action — fixed bottom right on listings</p>
+          <span class="fab" style="position:static"><i data-ic="sliders"></i></span></div>
+      </div>
+
+      <div class="sec" id="inputs">
+        <span class="eyebrow">08</span><h2 class="d3 mt-4">Inputs</h2>
+        <div class="cols-2 mt-8" style="gap:var(--s-6)">
+          <div class="field"><label class="field__label" for="x1">Default</label>
+            <input class="input" id="x1" placeholder="Locality or building"><p class="field__hint">Helper text sits here.</p></div>
+          <div class="field is-valid"><label class="field__label" for="x2">Valid</label>
+            <input class="input" id="x2" value="Malabar Hill, Mumbai"></div>
+          <div class="field is-error"><label class="field__label" for="x3">Error</label>
+            <input class="input" id="x3" value="notanemail">
+            <p class="field__err"><i data-ic="warn" data-size="14"></i>Enter a valid email address.</p></div>
+          <div class="field"><label class="field__label" for="x4">Read only</label>
+            <input class="input" id="x4" value="AVXPD••••K" readonly><p class="field__hint">Verified. Contact us to change it.</p></div>
+          <div class="field"><label class="field__label" for="x5">With icon and action</label>
+            <div class="input-group" data-pw><span class="input-group__icon"><i data-ic="lock" data-size="18"></i></span>
+              <input class="input" id="x5" type="password" value="secret123">
+              <button class="input-group__action" type="button">Show</button></div>
+            <div class="pw-meter" data-level="3"><span></span><span></span><span></span><span></span></div>
+            <p class="field__hint" data-pw-note>Good — add a symbol</p></div>
+          <div class="field"><label class="field__label" for="x6">Select</label>
+            <select class="select" id="x6"><option>Any residence</option><option>Villa</option><option>Penthouse</option></select></div>
+        </div>
+        <div class="field mt-6"><label class="field__label" for="x7">Textarea</label>
+          <textarea class="textarea" id="x7" placeholder="Four bedrooms, sea-facing, ready to move."></textarea></div>
+        <p class="h3 mt-9">Search bar</p>
+        <div class="searchbar mt-4">
+          <div class="searchbar__cell"><label for="x8">Where</label><input id="x8" placeholder="Alibaug, Malabar Hill…"></div>
+          <div class="searchbar__cell"><label for="x9">Type</label><select id="x9"><option>Any residence</option></select></div>
+          <div class="searchbar__cell"><label for="x10">Budget</label><select id="x10"><option>No limit</option></select></div>
+          <button class="btn btn--gold searchbar__go" type="button"><i data-ic="search" data-size="18"></i>Search</button>
+        </div>
+        <p class="h3 mt-9">OTP and upload</p>
+        <div class="demo mt-4 demo--stack">
+          <div class="otp"><input value="4" aria-label="Digit 1"><input value="7" aria-label="Digit 2"><input value="1" aria-label="Digit 3"><input aria-label="Digit 4"><input aria-label="Digit 5"><input aria-label="Digit 6"></div>
+          <div class="dropzone"><p class="h4">Drop a photo ID here</p><p class="cap mt-2">JPG or PDF, under 10 MB.</p></div>
+        </div>
+      </div>
+
+      <div class="sec" id="choice">
+        <span class="eyebrow">09</span><h2 class="d3 mt-4">Choice controls</h2>
+        <div class="demo mt-8" style="gap:var(--s-8)">
+          <div class="stack gap-4">
+            <label class="check"><input type="checkbox" checked><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Include off-market</span></label>
+            <label class="check"><input type="checkbox"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Private pool</span></label>
+          </div>
+          <div class="stack gap-4">
+            <label class="radio"><input type="radio" name="rr" checked><span class="radio__dot"></span><span>Buying</span></label>
+            <label class="radio"><input type="radio" name="rr"><span class="radio__dot"></span><span>Selling</span></label>
+          </div>
+          <div class="stack gap-4">
+            <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Email alerts on</span></label>
+            <label class="switch"><input type="checkbox"><span class="switch__track"></span><span>WhatsApp off</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" id="badges">
+        <span class="eyebrow">10</span><h2 class="d3 mt-4">Badges &amp; chips</h2>
+        <div class="demo mt-8">
+          <span class="badge">Villa</span><span class="badge badge--ink">New</span>
+          <span class="badge badge--gold">Exclusive</span>
+          <span class="badge badge--success badge--dot">Paid</span>
+          <span class="badge badge--warn badge--dot">Awaiting owner</span>
+          <span class="badge badge--error badge--dot">Declined</span>
+        </div>
+        <div class="demo mt-4">
+          <button class="chip">3+ bedrooms</button>
+          <button class="chip is-on">Mumbai <span class="chip__x"><i data-ic="x" data-size="12"></i></span></button>
+          <button class="chip">Sea view</button>
+        </div>
+      </div>
+
+      <div class="sec" id="cards">
+        <span class="eyebrow">11</span><h2 class="d3 mt-4">Cards</h2>
+        <div class="cols-3 mt-8">
+          <div class="card"><p class="h4">Default card</p><p class="b2 ink60 mt-2">White, hairline border, 32px padding.
+            Border darkens on hover when the card is a link.</p></div>
+          <div class="card" style="background:var(--gold-wash);border-color:#E7D9B9"><p class="h4">Prompt card</p>
+            <p class="b2 ink60 mt-2">Gold wash. Used once per page for a single suggestion.</p>
+            <a class="link mt-4" href="#">Request a valuation <i data-ic="arrow" data-size="16"></i></a></div>
+          <div class="card" style="border-color:#EED4D0;background:var(--red-wash)"><p class="h4">Danger card</p>
+            <p class="b2 ink60 mt-2">Destructive settings only. Always paired with a confirm dialog.</p>
+            <button class="btn btn--danger btn--sm mt-4">Delete account</button></div>
+        </div>
+      </div>
+
+      <div class="sec" id="prop">
+        <span class="eyebrow">12</span><h2 class="d3 mt-4">Property cards</h2>
+        <p class="b2 ink60 mt-4 measure">Two variants. Grid for browsing, row for map and wishlist views. The plate
+          scales 3.5% on hover, the plan marks grow, and the heart animates on save.</p>
+        <div class="cols-3 mt-8"><a class="prop " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Villa Anantara to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--horizon ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Villa Anantara</h3>
+    <span class="prop__price">₹18.4 Cr</span>
+  </div>
+  <p class="prop__loc">Awas Beach, Alibaug &middot; Sea-facing, 1.2-acre plot</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>8,200 sq ft</span>
+  </div>
+</a><a class="prop " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--night ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Skyline Penthouse 4201</h3>
+    <span class="prop__price">₹47.5 Cr</span>
+  </div>
+  <p class="prop__loc">Worli Sea Face, Mumbai &middot; 42nd floor, 270° water views</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>9,100 sq ft</span>
+  </div>
+</a><a class="prop " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Casa Assagao to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--court ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Casa Assagao</h3>
+    <span class="prop__price">₹9.6 Cr</span>
+  </div>
+  <p class="prop__loc">Assagao, North Goa &middot; Restored Portuguese courtyard house</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,300 sq ft</span>
+  </div>
+</a></div>
+        <div class="mt-8"><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Exclusive</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Malabar Duplex to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--tower ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Malabar Duplex</h3>
+    <span class="prop__price">₹32.0 Cr</span>
+  </div>
+  <p class="prop__loc">Malabar Hill, Mumbai &middot; Two floors, private lift lobby</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,400 sq ft</span>
+  </div>
+</a></div>
+      </div>
+
+      <div class="sec" id="price">
+        <span class="eyebrow">13</span><h2 class="d3 mt-4">Price cards</h2>
+        <div class="cols-3 mt-8">
+          <div class="price-card"><p class="mono-label muted">Guide price</p>
+            <p class="price-card__amt mt-3 num">₹18.4 Cr</p><p class="cap mt-2">₹22,400 per sq ft</p></div>
+          <div class="price-card price-card--feature"><p class="mono-label" style="color:var(--gold)">Monthly instalment</p>
+            <p class="price-card__amt mt-3 num">₹2,86,412</p>
+            <p class="cap mt-2" style="color:var(--stone-40)">20 years at 8.35%</p></div>
+          <div class="price-card"><p class="mono-label muted">Reservation fee</p>
+            <p class="price-card__amt mt-3 num">₹25,000</p><p class="cap mt-2">Refundable until 18:00 the day before</p></div>
+        </div>
+      </div>
+
+      <div class="sec" id="avatars">
+        <span class="eyebrow">14</span><h2 class="d3 mt-4">Avatars &amp; profile</h2>
+        <div class="demo mt-8">
+          <span class="av av--xs">RD</span><span class="av av--sm">RD</span>
+          <span class="av av--md av--gold">IS</span><span class="av av--lg av--ink">DS</span>
+          <span class="av av--xl av--gold">RD</span>
+          <span class="av av--md av--square">AT</span>
+          <span class="av av--md">IS<span class="av__badge"></span></span>
+          <span class="av-stack"><span class="av av--sm">IS</span><span class="av av--sm">NR</span><span class="av av--sm">MB</span><span class="av av--sm av--ink">+9</span></span>
+        </div>
+        <div class="card mt-6" style="max-width:420px">
+          <div class="row gap-4"><span class="av av--lg av--gold">IS</span>
+            <div><p class="h4">Ira Sethna</p><p class="cap">Principal Advisor, Mumbai South</p>
+              <p class="cap row gap-2 mt-2"><span class="stars"><i data-ic="star" data-size="13"></i></span>4.9 · 126 reviews</p></div></div>
+        </div>
+      </div>
+
+      <div class="sec" id="nav">
+        <span class="eyebrow">15</span><h2 class="d3 mt-4">Navigation</h2>
+        <p class="b2 ink60 mt-4 measure">The header is 84px tall and shrinks to 68px on scroll, when a hairline appears
+          under it. Over a dark hero it starts transparent and fills with ink.</p>
+        <div class="demo demo--stack mt-8">
+          <ol class="crumbs"><li><a href="#">Home</a></li><li><a href="#">Collection</a></li><li><a href="#">Penthouses</a></li><li aria-current="page">Skyline Penthouse 4201</li></ol>
+          <div class="row gap-6 mt-4">
+            <a class="nav__link" href="#">Residences</a>
+            <a class="nav__link" href="#" aria-current="page">Collection</a>
+            <a class="nav__link" href="#">Advisors</a>
+          </div>
+        </div>
+        <p class="h3 mt-9">Sidebar item states</p>
+        <div class="demo demo--stack mt-4" style="max-width:280px">
+          <button class="side__item is-active"><i data-ic="grid" data-size="18"></i>Overview</button>
+          <button class="side__item"><i data-ic="heart" data-size="18"></i>Saved residences</button>
+          <button class="side__item"><i data-ic="chat" data-size="18"></i>Messages<span class="push badge badge--gold">2</span></button>
+        </div>
+      </div>
+
+      <div class="sec" id="tabs">
+        <span class="eyebrow">16</span><h2 class="d3 mt-4">Tabs &amp; segments</h2>
+        <div class="mt-8" data-tabs>
+          <div class="tabs" role="tablist" aria-label="Example tabs">
+            <button class="tab" role="tab" aria-selected="true" aria-controls="sp1" id="st1">The residence</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="sp2" id="st2" tabindex="-1">Floor plans</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="sp3" id="st3" tabindex="-1">Amenities</button>
+          </div>
+          <div class="tabpanel mt-5" id="sp1" role="tabpanel" aria-labelledby="st1"><p class="b2 ink60">Arrow keys move between tabs. Panels are hidden, not unmounted.</p></div>
+          <div class="tabpanel mt-5" id="sp2" role="tabpanel" aria-labelledby="st2" hidden><p class="b2 ink60">Second panel.</p></div>
+          <div class="tabpanel mt-5" id="sp3" role="tabpanel" aria-labelledby="st3" hidden><p class="b2 ink60">Third panel.</p></div>
+        </div>
+        <div class="demo mt-6">
+          <div class="seg" data-seg>
+            <button aria-pressed="true"><i data-ic="grid" data-size="16"></i>Grid</button>
+            <button aria-pressed="false"><i data-ic="filter" data-size="16"></i>List</button>
+            <button aria-pressed="false"><i data-ic="map" data-size="16"></i>Map</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" id="pager">
+        <span class="eyebrow">17</span><h2 class="d3 mt-4">Pagination</h2>
+        <div class="demo mt-8">
+          <div class="pager">
+            <button aria-label="Previous" disabled><i data-ic="chevL" data-size="16"></i></button>
+            <button aria-current="page">1</button><button>2</button><button>3</button>
+            <span class="muted">…</span><button>5</button>
+            <button aria-label="Next"><i data-ic="chevR" data-size="16"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" id="tables">
+        <span class="eyebrow">18</span><h2 class="d3 mt-4">Tables</h2>
+        <div class="table-wrap mt-8"><table class="table">
+          <thead><tr><th>Reference</th><th>For</th><th>Date</th><th class="table__num">Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="num">AT-91204</td><td>Viewing reservation</td><td class="num">22 Jul 2026</td><td class="table__num">₹29,500</td><td><span class="badge badge--success badge--dot">Paid</span></td></tr>
+            <tr><td class="num">AT-90887</td><td>Token amount</td><td class="num">18 Jul 2026</td><td class="table__num">₹4,00,000</td><td><span class="badge badge--success badge--dot">Paid</span></td></tr>
+            <tr><td class="num">AT-89901</td><td>Viewing reservation</td><td class="num">10 Jun 2026</td><td class="table__num">₹25,000</td><td><span class="badge badge--warn badge--dot">Refunded</span></td></tr>
+          </tbody></table></div>
+        <p class="cap mt-3">Figures are Inter with tabular numerals so columns align. Rows warm on hover.</p>
+      </div>
+
+      <div class="sec" id="charts">
+        <span class="eyebrow">19</span><h2 class="d3 mt-4">Charts</h2>
+        <p class="b2 ink60 mt-4 measure">Two inks and one gold. No gridline is heavier than a hairline, and nothing is
+          plotted that a table would say better.</p>
+        <div class="cols-2 mt-8" style="gap:var(--s-6)">
+          <div class="panel" style="border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)">
+            <p class="h4">Viewings and offers</p>
+            <div class="chart-grid mt-6" style="padding-top:var(--s-5)">
+              <div class="bars">
+                <div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="14%"></div><div class="bars__bar" data-h="52%"></div></div>
+                <div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="18%"></div><div class="bars__bar" data-h="64%"></div></div>
+                <div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="22%"></div><div class="bars__bar" data-h="76%"></div></div>
+                <div class="bars__col"><div class="bars__bar bars__bar--gold" data-h="26%"></div><div class="bars__bar" data-h="88%"></div></div>
+              </div>
+            </div>
+            <div class="legend mt-5"><span><i></i>Viewings</span><span><i class="g"></i>Offers</span></div>
+          </div>
+          <div class="panel" style="border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)">
+            <p class="h4">Pipeline</p>
+            <div class="row gap-6 mt-6"><div class="donut" style="--v:68"><span class="num">68%</span></div>
+              <div class="stack gap-3 cap"><span><strong class="num">14</strong> in negotiation</span>
+                <span><strong class="num">6</strong> accepted</span><span><strong class="num">3</strong> registering</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" id="cal">
+        <span class="eyebrow">20</span><h2 class="d3 mt-4">Calendar &amp; date picker</h2>
+        <div class="cols-2 mt-8" style="gap:var(--s-6);align-items:start">
+          <div class="cal" data-cal>
+            <div class="cal__head">
+              <button class="cal__nav" type="button" data-cal-step="-1" aria-label="Previous month"><i data-ic="chevL" data-size="16"></i></button>
+              <p class="h4" data-cal-label>—</p>
+              <button class="cal__nav" type="button" data-cal-step="1" aria-label="Next month"><i data-ic="chevR" data-size="16"></i></button>
+            </div>
+            <div class="cal__grid"></div>
+          </div>
+          <div>
+            <p class="spec">Time slots</p>
+            <div class="slots mt-4">
+              <button class="slot" data-one aria-pressed="true">10:00</button>
+              <button class="slot" data-one aria-pressed="false">11:30</button>
+              <button class="slot" disabled>14:00</button>
+              <button class="slot" data-one aria-pressed="false">16:30</button>
+            </div>
+            <p class="cap mt-5">Past dates and Sundays are struck through and unfocusable. A gold dot marks a day with
+              slots left.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" id="steps">
+        <span class="eyebrow">21</span><h2 class="d3 mt-4">Steppers &amp; progress</h2>
+        <div class="demo demo--stack mt-8">
+          <div class="steps">
+            <div class="step is-done"><span class="step__n"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Residence</span></div>
+            <span class="step__line"></span>
+            <div class="step is-current"><span class="step__n">2</span><span>Date</span></div>
+            <span class="step__line"></span>
+            <div class="step"><span class="step__n">3</span><span>Time</span></div>
+          </div>
+          <div class="progress" style="margin-top:var(--s-5)"><div class="progress__fill" style="width:66%"></div></div>
+        </div>
+      </div>
+
+      <div class="sec" id="feedback">
+        <span class="eyebrow">22</span><h2 class="d3 mt-4">Toasts, modals, accordions</h2>
+        <div class="demo mt-8">
+          <button class="btn btn--outlined" onclick="toast('Saved to wishlist','Find it under Wishlist in your account.','success')">Success toast</button>
+          <button class="btn btn--outlined" onclick="toast('Check the highlighted fields','A few details are missing.','error')">Error toast</button>
+          <button class="btn btn--outlined" onclick="toast('Link copied')">Neutral toast</button>
+          <button class="btn btn--primary" data-modal="m-sys">Open modal</button>
+        </div>
+        <div class="acc mt-9">
+          <div class="acc__item"><button class="acc__btn" aria-expanded="false"><span>Do you charge buyers a fee?</span><span class="acc__ico"></span></button>
+            <div class="acc__panel"><div><p>No. Our fee is paid by the party who instructs us, and it is stated in writing before any viewing.</p></div></div></div>
+          <div class="acc__item"><button class="acc__btn" aria-expanded="false"><span>Can I see an off-market residence?</span><span class="acc__ico"></span></button>
+            <div class="acc__panel"><div><p>Yes, once you are registered and we have the owner's consent.</p></div></div></div>
+        </div>
+      </div>
+
+      <div class="sec" id="skeleton">
+        <span class="eyebrow">23</span><h2 class="d3 mt-4">Loading &amp; empty states</h2>
+        <div class="cols-3 mt-8"><div>
+  <div class="sk sk-plate"></div>
+  <div class="sk sk-title mt-4"></div>
+  <div class="sk sk-line mt-3" style="width:46%"></div>
+  <div class="sk sk-line mt-4" style="width:72%"></div>
+</div><div>
+  <div class="sk sk-plate"></div>
+  <div class="sk sk-title mt-4"></div>
+  <div class="sk sk-line mt-3" style="width:46%"></div>
+  <div class="sk sk-line mt-4" style="width:72%"></div>
+</div><div>
+  <div class="sk sk-plate"></div>
+  <div class="sk sk-title mt-4"></div>
+  <div class="sk sk-line mt-3" style="width:46%"></div>
+  <div class="sk sk-line mt-4" style="width:72%"></div>
+</div></div>
+        <div class="empty mt-8">
+          <span class="empty__art"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 72h72M24 72V36l24-16 24 16v36"/><path d="M36 72V52h10v20"/><path d="M56 46h10v10H56z"/><circle cx="70" cy="26" r="12"/><path d="m79 35 9 9"/></svg></span>
+          <h3 class="h2">No residence matches all six filters</h3>
+          <p class="b2 ink60 measure-s">Sea-view penthouses under ₹20 Cr are rare in Mumbai. Widen the budget or drop the
+            floor requirement to see nine close matches.</p>
+          <button class="btn btn--primary">Widen budget to ₹35 Cr</button>
+        </div>
+        <p class="cap mt-4">Empty states name the constraint that is blocking the result and offer the single most likely
+          fix. They never apologise.</p>
+      </div>
+
+      <div class="sec" id="icons">
+        <span class="eyebrow">24</span><h2 class="d3 mt-4">Icons</h2>
+        <p class="b2 ink60 mt-4 measure">Fifty-five line icons on a 20px grid at 1.25px, rounded joins. Drawn to sit
+          beside General Sans at 15–17px without optical correction.</p>
+        <div class="icon-grid mt-8"><div class="icon-cell"><i data-ic="search" data-size="22" style="justify-content:center"></i><span>search</span></div><div class="icon-cell"><i data-ic="pin" data-size="22" style="justify-content:center"></i><span>pin</span></div><div class="icon-cell"><i data-ic="heart" data-size="22" style="justify-content:center"></i><span>heart</span></div><div class="icon-cell"><i data-ic="bed" data-size="22" style="justify-content:center"></i><span>bed</span></div><div class="icon-cell"><i data-ic="bath" data-size="22" style="justify-content:center"></i><span>bath</span></div><div class="icon-cell"><i data-ic="area" data-size="22" style="justify-content:center"></i><span>area</span></div><div class="icon-cell"><i data-ic="car" data-size="22" style="justify-content:center"></i><span>car</span></div><div class="icon-cell"><i data-ic="arrow" data-size="22" style="justify-content:center"></i><span>arrow</span></div><div class="icon-cell"><i data-ic="chevD" data-size="22" style="justify-content:center"></i><span>chevD</span></div><div class="icon-cell"><i data-ic="check" data-size="22" style="justify-content:center"></i><span>check</span></div><div class="icon-cell"><i data-ic="x" data-size="22" style="justify-content:center"></i><span>x</span></div><div class="icon-cell"><i data-ic="plus" data-size="22" style="justify-content:center"></i><span>plus</span></div><div class="icon-cell"><i data-ic="star" data-size="22" style="justify-content:center"></i><span>star</span></div><div class="icon-cell"><i data-ic="calendar" data-size="22" style="justify-content:center"></i><span>calendar</span></div><div class="icon-cell"><i data-ic="clock" data-size="22" style="justify-content:center"></i><span>clock</span></div><div class="icon-cell"><i data-ic="user" data-size="22" style="justify-content:center"></i><span>user</span></div><div class="icon-cell"><i data-ic="mail" data-size="22" style="justify-content:center"></i><span>mail</span></div><div class="icon-cell"><i data-ic="phone" data-size="22" style="justify-content:center"></i><span>phone</span></div><div class="icon-cell"><i data-ic="lock" data-size="22" style="justify-content:center"></i><span>lock</span></div><div class="icon-cell"><i data-ic="eye" data-size="22" style="justify-content:center"></i><span>eye</span></div><div class="icon-cell"><i data-ic="bell" data-size="22" style="justify-content:center"></i><span>bell</span></div><div class="icon-cell"><i data-ic="home" data-size="22" style="justify-content:center"></i><span>home</span></div><div class="icon-cell"><i data-ic="doc" data-size="22" style="justify-content:center"></i><span>doc</span></div><div class="icon-cell"><i data-ic="chat" data-size="22" style="justify-content:center"></i><span>chat</span></div><div class="icon-cell"><i data-ic="grid" data-size="22" style="justify-content:center"></i><span>grid</span></div><div class="icon-cell"><i data-ic="map" data-size="22" style="justify-content:center"></i><span>map</span></div><div class="icon-cell"><i data-ic="filter" data-size="22" style="justify-content:center"></i><span>filter</span></div><div class="icon-cell"><i data-ic="sliders" data-size="22" style="justify-content:center"></i><span>sliders</span></div><div class="icon-cell"><i data-ic="share" data-size="22" style="justify-content:center"></i><span>share</span></div><div class="icon-cell"><i data-ic="download" data-size="22" style="justify-content:center"></i><span>download</span></div><div class="icon-cell"><i data-ic="play" data-size="22" style="justify-content:center"></i><span>play</span></div><div class="icon-cell"><i data-ic="cube" data-size="22" style="justify-content:center"></i><span>cube</span></div><div class="icon-cell"><i data-ic="plan" data-size="22" style="justify-content:center"></i><span>plan</span></div><div class="icon-cell"><i data-ic="school" data-size="22" style="justify-content:center"></i><span>school</span></div><div class="icon-cell"><i data-ic="hospital" data-size="22" style="justify-content:center"></i><span>hospital</span></div><div class="icon-cell"><i data-ic="train" data-size="22" style="justify-content:center"></i><span>train</span></div><div class="icon-cell"><i data-ic="card" data-size="22" style="justify-content:center"></i><span>card</span></div><div class="icon-cell"><i data-ic="bank" data-size="22" style="justify-content:center"></i><span>bank</span></div><div class="icon-cell"><i data-ic="upi" data-size="22" style="justify-content:center"></i><span>upi</span></div><div class="icon-cell"><i data-ic="logout" data-size="22" style="justify-content:center"></i><span>logout</span></div><div class="icon-cell"><i data-ic="settings" data-size="22" style="justify-content:center"></i><span>settings</span></div><div class="icon-cell"><i data-ic="trend" data-size="22" style="justify-content:center"></i><span>trend</span></div><div class="icon-cell"><i data-ic="users" data-size="22" style="justify-content:center"></i><span>users</span></div><div class="icon-cell"><i data-ic="rupee" data-size="22" style="justify-content:center"></i><span>rupee</span></div><div class="icon-cell"><i data-ic="ticket" data-size="22" style="justify-content:center"></i><span>ticket</span></div><div class="icon-cell"><i data-ic="shield" data-size="22" style="justify-content:center"></i><span>shield</span></div><div class="icon-cell"><i data-ic="wifi" data-size="22" style="justify-content:center"></i><span>wifi</span></div><div class="icon-cell"><i data-ic="pool" data-size="22" style="justify-content:center"></i><span>pool</span></div><div class="icon-cell"><i data-ic="gym" data-size="22" style="justify-content:center"></i><span>gym</span></div><div class="icon-cell"><i data-ic="lift" data-size="22" style="justify-content:center"></i><span>lift</span></div><div class="icon-cell"><i data-ic="trees" data-size="22" style="justify-content:center"></i><span>trees</span></div><div class="icon-cell"><i data-ic="key" data-size="22" style="justify-content:center"></i><span>key</span></div><div class="icon-cell"><i data-ic="quote" data-size="22" style="justify-content:center"></i><span>quote</span></div><div class="icon-cell"><i data-ic="info" data-size="22" style="justify-content:center"></i><span>info</span></div><div class="icon-cell"><i data-ic="warn" data-size="22" style="justify-content:center"></i><span>warn</span></div></div>
+        <p class="h3 mt-9">Illustration</p>
+        <p class="b2 ink60 mt-3 measure">Illustration follows the same hand: single-weight architectural line work, ink
+          on paper, gold only for dimension marks. No filled shapes, no characters, no spot colour.</p>
+        <div class="demo mt-4">
+          <svg viewBox="0 0 260 140" width="260" height="140" fill="none" stroke="#111" stroke-width="1">
+            <path d="M10 120h240M40 120V50h90v70M40 50l45-28 45 28"/>
+            <path d="M60 120V85h30v35M150 120V64h70v56M150 82h70M150 100h70"/>
+            <g stroke="#C8A96A"><path d="M40 132h90M40 126v12M130 126v12"/></g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="sec" id="a11y">
+        <span class="eyebrow">25</span><h2 class="d3 mt-4">Accessibility</h2>
+        <div class="cols-2 mt-8" style="gap:var(--s-8)">
+          <dl>
+            <div class="kv"><dt>Ink on paper</dt><dd>15.9:1 · AAA</dd></div>
+            <div class="kv"><dt>Ink 60 on paper</dt><dd>8.4:1 · AAA</dd></div>
+            <div class="kv"><dt>Stone on paper</dt><dd>3.6:1 · large text only</dd></div>
+            <div class="kv"><dt>Gold dim on paper</dt><dd>4.6:1 · AA</dd></div>
+            <div class="kv"><dt>Paper on ink</dt><dd>15.9:1 · AAA</dd></div>
+            <div class="kv"><dt>Gold on ink</dt><dd>8.1:1 · AAA</dd></div>
+          </dl>
+          <ul class="stack gap-4 b2 ink60">
+            <li><strong class="ink60" style="color:var(--ink)">Focus.</strong> A 2px gold-dim ring at 3px offset on every
+              interactive element. Never removed, only restyled.</li>
+            <li><strong style="color:var(--ink)">Keyboard.</strong> Tabs take arrow keys, modals trap focus and close on
+              Escape, the skip link is the first thing in the tab order.</li>
+            <li><strong style="color:var(--ink)">Labels.</strong> Every input has a visible label. Icon-only buttons carry
+              aria-label; state lives in aria-pressed and aria-current.</li>
+            <li><strong style="color:var(--ink)">Motion.</strong> prefers-reduced-motion cuts every transition, the hero
+              draws instantly, and the ripple is skipped.</li>
+            <li><strong style="color:var(--ink)">Text.</strong> Body copy never below 15px, line length capped at 66
+              characters, no text baked into a plate.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec" id="responsive">
+        <span class="eyebrow">26</span><h2 class="d3 mt-4">Responsive behaviour</h2>
+        <div class="table-wrap mt-8"><table class="table">
+          <thead><tr><th>Pattern</th><th>Desktop ≥1100</th><th>Tablet 720–1100</th><th>Mobile &lt;720</th></tr></thead>
+          <tbody>
+            <tr><td>Grid</td><td>12 columns, 80px margin</td><td>12 columns, 40px margin</td><td>6 columns, 20px margin</td></tr>
+            <tr><td>Header</td><td>Inline links</td><td>Inline links</td><td>Burger to full-screen drawer</td></tr>
+            <tr><td>Property grid</td><td>3 up</td><td>2 up</td><td>1 up</td></tr>
+            <tr><td>Search bar</td><td>Four cells in a row</td><td>Stacked cells</td><td>Stacked cells</td></tr>
+            <tr><td>Listing filters</td><td>Sticky left rail</td><td>Sticky left rail</td><td>Floating action to a sheet</td></tr>
+            <tr><td>Dashboard</td><td>264px sidebar</td><td>Scrolling icon rail</td><td>Scrolling icon rail</td></tr>
+            <tr><td>Gallery</td><td>2:1 split, three plates</td><td>Single plate</td><td>Single plate</td></tr>
+            <tr><td>Section rhythm</td><td>160px</td><td>112px</td><td>80px</td></tr>
+          </tbody></table></div>
+      </div>
+
+      <div class="sec" id="naming">
+        <span class="eyebrow">27</span><h2 class="d3 mt-4">Naming &amp; tokens</h2>
+        <p class="b2 ink60 mt-4 measure">Components are block, element, modifier. Tokens are role-first, never
+          value-first, so a repaint never renames anything.</p>
+        <div class="cols-2 mt-8" style="gap:var(--s-8)">
+          <div>
+            <p class="spec">Components</p>
+            <div class="stack gap-2 mt-4 b2"><code>prop / prop__media / prop--row</code>
+              <code>btn / btn--primary / btn--sm / is-loading</code>
+              <code>field / field__label / is-error</code>
+              <code>plate / plate--night / ar-4-3</code>
+              <code>pf</code> <span class="cap">plan-frame, the corner ticks</span></div>
+          </div>
+          <div>
+            <p class="spec">Tokens</p>
+            <div class="stack gap-2 mt-4 b2"><code>--ink · --paper · --gold · --hairline</code>
+              <code>--s-1 … --s-13</code>
+              <code>--t-d1 … --t-mic</code>
+              <code>--r-0 … --r-full</code>
+              <code>--ease · --fast · --mid · --slow</code></div>
+          </div>
+        </div>
+        <p class="spec mt-9">Frame naming, for the Figma file</p>
+        <div class="stack gap-2 mt-4 b2 ink60">
+          <code>01 Foundations / Colour · Type · Spacing · Grid</code>
+          <code>02 Components / Buttons · Inputs · Cards · Data</code>
+          <code>03 Public / 01 Landing · 02 Collection · 03 Residence · …</code>
+          <code>04 Auth / 01 Sign in · 02 Register · 03 OTP · …</code>
+          <code>05 Portal / 01 Overview · 02 Saved · …</code>
+          <code>06 Booking / 01 Residence → 07 Payment</code>
+          <code>07 Admin / 01 Overview · 02 Analytics · …</code>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="m-sys" role="dialog" aria-modal="true" aria-labelledby="syst">
+  <div class="modal__scrim"></div>
+  <div class="modal__box">
+    <button class="modal__x" data-dismiss aria-label="Close"><i data-ic="x"></i></button>
+    <span class="badge badge--gold">Dialog</span>
+    <h2 class="h1 mt-4" id="syst">Confirm this viewing?</h2>
+    <p class="b2 ink60 mt-4">Thursday 30 July at 10:00, Skyline Penthouse 4201. Free to cancel until 18:00 the day before.</p>
+    <div class="row gap-3 mt-7"><button class="btn btn--primary" onclick="closeModal('m-sys');toast('Viewing booked','Reference AT-91204.','success')">Confirm</button>
+      <button class="btn btn--ghost" data-dismiss>Not yet</button></div>
+  </div>
+</div>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <div class="row gap-3"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></div>
+        <p class="lede mt-5" style="max-width:34ch;color:rgba(250,250,247,.66)">Private residential brokerage for architecturally significant homes across India.</p>
+        <form class="mt-6" data-validate data-msg="Subscribed" data-sub="The Atria Journal arrives on the first Thursday of each month." style="max-width:340px">
+          <label class="foot__label" for="nl" style="margin-bottom:8px">The monthly journal</label>
+          <div class="row gap-2">
+            <input class="input" id="nl" type="email" required placeholder="you@email.com" style="background:transparent;border-color:rgba(250,250,247,.28);color:var(--paper)">
+            <button class="btn btn--gold" type="submit" aria-label="Subscribe"><i data-ic="arrow"></i></button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="foot__label">Explore</p>
+        <ul class="stack gap-3">
+          <li><a href="listings.html">The collection</a></li>
+          <li><a href="listings.html#villas">Villas</a></li>
+          <li><a href="listings.html#apartments">Apartments</a></li>
+          <li><a href="listings.html#penthouses">Penthouses</a></li>
+          <li><a href="search.html">Saved searches</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Company</p>
+        <ul class="stack gap-3">
+          <li><a href="about.html">Our house</a></li>
+          <li><a href="agents.html">Advisors</a></li>
+          <li><a href="contact.html">Offices</a></li>
+          <li><a href="contact.html#faq">Questions</a></li>
+          <li><a href="system.html">Design system</a></li>
+          <li><a href="admin.html">Admin console</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <ul class="stack gap-3">
+          <li><a href="tel:+912266550100">+91 22 6655 0100</a></li>
+          <li><a href="mailto:private@atria.house">private@atria.house</a></li>
+          <li><a href="dashboard.html">Client portal</a></li>
+        </ul>
+        <p class="foot__label mt-8">Follow</p>
+        <ul class="stack gap-3">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; 2026 Atria Residential Pvt. Ltd.</span>
+      <span>RERA A52100031204</span>
+      <span class="push"><a href="#">Privacy</a></span>
+      <span><a href="#">Terms</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

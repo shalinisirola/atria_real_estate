@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forgot password — Atria</title>
+<meta name="description" content="Forgot password">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+
+<main id="main">
+<style>
+body{overflow-x:hidden}
+.auth{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.auth__aside{position:relative;background:var(--ink);color:var(--paper);padding:var(--s-8) var(--s-9);
+  display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.auth__aside .plate{position:absolute;inset:0;opacity:.5}
+.auth__aside > *{position:relative;z-index:1}
+.auth__main{display:flex;align-items:center;justify-content:center;padding:var(--s-9) var(--s-7)}
+.auth__form{width:100%;max-width:420px}
+.auth__form--wide{max-width:520px}
+@media(max-width:900px){.auth{grid-template-columns:1fr}.auth__aside{display:none}}
+.social{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3)}
+.divider{display:flex;align-items:center;gap:var(--s-4);color:var(--stone);font-size:var(--t-cap)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--hairline)}
+.check-icon{width:72px;height:72px;border:1px solid var(--green);border-radius:50%;display:grid;place-items:center;color:var(--green)}
+.check-icon svg{animation:pop 620ms var(--ease)}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+</style>
+<section class="auth">
+  <aside class="auth__aside">
+    <div class="plate plate--slab"></div>
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <div>
+      <p class="quote" style="max-width:26ch">&ldquo;Call the office. Someone picks up.&rdquo;</p>
+      <p class="cap mt-6">Mumbai — Mon to Sat, 09:30–19:00</p>
+    </div>
+    <div class="row gap-8"><div><p class="h2 num">41</p><p class="stat__l">Residences</p></div><div><p class="h2 num">12</p><p class="stat__l">Off-market</p></div><div><p class="h2 num">28</p><p class="stat__l">Advisors</p></div></div>
+  </aside>
+  <div class="auth__main"><div class="auth__form">
+  <a class="link link--quiet" href="login.html"><i data-ic="arrowL" data-size="16"></i>Back to sign in</a>
+  <h1 class="d3 mt-6">Reset your password</h1>
+  <p class="b2 ink60 mt-3">Enter your registered email. We will send a link that stays valid for thirty minutes.</p>
+  <form class="mt-8" data-validate data-msg="Link sent" data-sub="Check your inbox and spam folder." data-success="reset.html">
+    <div class="field">
+      <label class="field__label" for="e3">Email</label>
+      <div class="input-group">
+        <span class="input-group__icon"><i data-ic="mail" data-size="18"></i></span>
+        <input class="input" id="e3" type="email" required autocomplete="email" placeholder="you@email.com">
+      </div>
+      <p class="field__err"><i data-ic="warn" data-size="14"></i>We have no account with that email.</p>
+    </div>
+    <button class="btn btn--primary btn--block btn--lg mt-6" type="submit">Send reset link</button>
+  </form>
+  <div class="card mt-8" style="background:var(--paper-warm)">
+    <p class="h4">Nothing arrived?</p>
+    <p class="b2 ink60 mt-2">Call the office on +91 22 6655 0100 and we will verify you and reset it manually.</p>
+  </div>
+</div></div>
+</section>
+</main>
+
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The collection — Atria</title>
+<meta name="description" content="41 architecturally significant residences across Mumbai, Alibaug, Goa and Delhi.">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <nav class="nav__links" aria-label="Primary"><a class="nav__link" href="index.html">Residences</a><a class="nav__link" href="listings.html" aria-current="page">Collection</a><a class="nav__link" href="agents.html">Advisors</a><a class="nav__link" href="about.html">House</a><a class="nav__link" href="journal.html">Journal</a><a class="nav__link" href="contact.html">Contact</a></nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="login.html"><i data-ic="user" data-size="18"></i>Account</a>
+      <a class="btn btn--secondary btn--sm" href="booking.html">Book a viewing</a>
+      <button class="nav__burger" aria-label="Open menu"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" role="dialog" aria-label="Menu" aria-modal="true">
+  <div class="row" style="justify-content:space-between">
+    <span class="brand__word">Atria</span>
+    <button class="btn btn--ghost" data-close-drawer aria-label="Close menu"><i data-ic="x"></i></button>
+  </div>
+  <nav class="stack mt-8" style="flex:1"><a href="index.html" data-close-drawer>Residences</a><a href="listings.html" data-close-drawer>Collection</a><a href="agents.html" data-close-drawer>Advisors</a><a href="about.html" data-close-drawer>House</a><a href="journal.html" data-close-drawer>Journal</a><a href="contact.html" data-close-drawer>Contact</a></nav>
+  <a class="btn btn--primary btn--block mt-6" href="booking.html">Book a viewing</a>
+</div>
+<main id="main">
+<style>
+.page-head{padding-top:var(--s-10);padding-bottom:var(--s-8);border-bottom:1px solid var(--hairline)}
+.listing{display:grid;grid-template-columns:280px 1fr;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.listing{grid-template-columns:1fr}}
+.filters{position:sticky;top:104px;display:flex;flex-direction:column;gap:var(--s-6)}
+.filters__grp{border-top:1px solid var(--hairline);padding-top:var(--s-4)}
+.filters__grp h3{font-family:var(--data);font-size:var(--t-mic);letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:var(--s-4)}
+input[type=range]{width:100%;accent-color:#111}
+.map-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);height:78vh}
+.map-split .map{height:100%}
+.map-list{overflow-y:auto;padding-right:var(--s-4);display:flex;flex-direction:column;gap:var(--s-6)}
+@media(max-width:900px){.map-split{grid-template-columns:1fr;height:auto}.map-split .map{height:52vh}}
+.detail{display:grid;grid-template-columns:1fr 380px;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.detail{grid-template-columns:1fr}}
+.amen{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5) var(--s-6)}
+.amen span{display:flex;align-items:center;gap:var(--s-3);font-size:var(--t-b2);padding-block:var(--s-2)}
+.amen i{color:var(--gold-dim)}
+@media(max-width:720px){.amen{grid-template-columns:1fr 1fr}}
+.agent-card{border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)}
+.range-out{display:flex;justify-content:space-between;font-family:var(--data);font-size:var(--t-cap);color:var(--stone)}
+.tl{border-bottom:1px solid var(--hairline)}
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-9)}
+@media(max-width:900px){.lead-grid{grid-template-columns:1fr}}
+</style>
+<div class="wrap page-head">
+  <ol class="crumbs"><li><a href="index.html">Home</a></li><li aria-current="page">The collection</li></ol>
+  <div class="row wrapline gap-5 mt-6" style="justify-content:space-between;align-items:flex-end">
+    <div>
+      <h1 class="d3">The collection</h1>
+      <p class="cap mt-3"><span class="num">41</span> residences &middot; updated 24 July 2026</p>
+    </div>
+    <div class="row gap-3 wrapline">
+      <div class="seg" data-seg>
+        <button type="button" aria-pressed="true" data-view="grid"><i data-ic="grid" data-size="16"></i>Grid</button>
+        <button type="button" aria-pressed="false" data-view="list"><i data-ic="filter" data-size="16"></i>List</button>
+        <button type="button" aria-pressed="false" data-view="map"><i data-ic="map" data-size="16"></i>Map</button>
+      </div>
+      <label class="sr" for="sort">Sort</label>
+      <select class="select" id="sort" style="width:220px;height:44px">
+        <option>Newest first</option><option>Price: high to low</option>
+        <option>Price: low to high</option><option>Largest floor area</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<section class="wrap" style="padding-block:var(--s-8) var(--s-12)">
+  <div class="listing">
+    <aside><form class="filters" aria-label="Filters">
+  <div class="row" style="justify-content:space-between">
+    <h2 class="h4">Filters</h2>
+    <button class="btn btn--ghost btn--sm" type="reset">Clear</button>
+  </div>
+  <div class="input-group">
+    <span class="input-group__icon"><i data-ic="search" data-size="18"></i></span>
+    <input class="input" type="search" placeholder="Locality or building" aria-label="Search locality">
+  </div>
+  <div class="filters__grp">
+    <h3>Price</h3>
+    <input type="range" min="4" max="100" value="52" aria-label="Maximum price in crore">
+    <div class="range-out mt-2"><span>₹4 Cr</span><span>₹52 Cr</span></div>
+  </div>
+  <div class="filters__grp">
+    <h3>Bedrooms</h3>
+    <div class="row gap-2 wrapline">
+      <button class="chip" type="button" data-one aria-pressed="false">2+</button>
+      <button class="chip" type="button" data-one aria-pressed="true">3+</button>
+      <button class="chip" type="button" data-one aria-pressed="false">4+</button>
+      <button class="chip" type="button" data-one aria-pressed="false">5+</button>
+    </div>
+  </div>
+  <div class="filters__grp">
+    <h3>Bathrooms</h3>
+    <div class="row gap-2 wrapline">
+      <button class="chip" type="button" data-one aria-pressed="false">2+</button>
+      <button class="chip" type="button" data-one aria-pressed="true">3+</button>
+      <button class="chip" type="button" data-one aria-pressed="false">5+</button>
+    </div>
+  </div>
+  <div class="filters__grp">
+    <h3>Residence type</h3>
+    <div class="stack gap-3"><label class="check"><input type="checkbox" name="villa"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Villa <span class="muted num">(14)</span></span></label><label class="check"><input type="checkbox" name="apt"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Apartment <span class="muted num">(18)</span></span></label><label class="check"><input type="checkbox" name="pent"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Penthouse <span class="muted num">(6)</span></span></label><label class="check"><input type="checkbox" name="bung"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Bungalow <span class="muted num">(3)</span></span></label></div>
+  </div>
+  <div class="filters__grp">
+    <h3>Location</h3>
+    <div class="stack gap-3"><label class="check"><input type="checkbox" name="mum"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Mumbai <span class="muted num">(21)</span></span></label><label class="check"><input type="checkbox" name="ali"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Alibaug <span class="muted num">(8)</span></span></label><label class="check"><input type="checkbox" name="goa"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Goa <span class="muted num">(7)</span></span></label><label class="check"><input type="checkbox" name="del"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>New Delhi <span class="muted num">(5)</span></span></label></div>
+  </div>
+  <div class="filters__grp">
+    <h3>Amenities</h3>
+    <div class="stack gap-3"><label class="check"><input type="checkbox" name="pool"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Private pool <span class="muted num">(11)</span></span></label><label class="check"><input type="checkbox" name="sea"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Sea view <span class="muted num">(9)</span></span></label><label class="check"><input type="checkbox" name="lift"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Home lift <span class="muted num">(6)</span></span></label><label class="check"><input type="checkbox" name="staff"><span class="check__box"><svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.6 8 14.5 16 5.8"/></svg></span><span>Staff quarters <span class="muted num">(12)</span></span></label></div>
+  </div>
+  <div class="filters__grp">
+    <label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Include off-market</span></label>
+  </div>
+  <button class="btn btn--primary btn--block" type="button" onclick="toast('Search saved','We will email you when a match is listed.','success')">
+    <i data-ic="bell" data-size="18"></i>Save this search</button>
+</form></aside>
+    <div>
+      <div class="row gap-2 wrapline">
+  <button class="chip is-on" type="button">3+ bedrooms <span class="chip__x"><i data-ic="x" data-size="12"></i></span></button>
+  <button class="chip is-on" type="button">Mumbai <span class="chip__x"><i data-ic="x" data-size="12"></i></span></button>
+  <button class="chip is-on" type="button">Under ₹52 Cr <span class="chip__x"><i data-ic="x" data-size="12"></i></span></button>
+  <button class="btn btn--ghost btn--sm" type="button">Clear all</button>
+</div>
+      <div data-viewpane="grid">
+        <div class="cols-3 mt-8"><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Villa Anantara to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--horizon ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Villa Anantara</h3>
+    <span class="prop__price">₹18.4 Cr</span>
+  </div>
+  <p class="prop__loc">Awas Beach, Alibaug &middot; Sea-facing, 1.2-acre plot</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>8,200 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Exclusive</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Malabar Duplex to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--tower ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Malabar Duplex</h3>
+    <span class="prop__price">₹32.0 Cr</span>
+  </div>
+  <p class="prop__loc">Malabar Hill, Mumbai &middot; Two floors, private lift lobby</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,400 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--night ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Skyline Penthouse 4201</h3>
+    <span class="prop__price">₹47.5 Cr</span>
+  </div>
+  <p class="prop__loc">Worli Sea Face, Mumbai &middot; 42nd floor, 270° water views</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>9,100 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Casa Assagao to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--court ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Casa Assagao</h3>
+    <span class="prop__price">₹9.6 Cr</span>
+  </div>
+  <p class="prop__loc">Assagao, North Goa &middot; Restored Portuguese courtyard house</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,300 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Private</span><span class="badge">Bungalow</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bungalow Twelve to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--portal ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Bungalow Twelve</h3>
+    <span class="prop__price">₹92.0 Cr</span>
+  </div>
+  <p class="prop__loc">Prithviraj Road, New Delhi &middot; Lutyens zone, shown on request</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>6 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>7 bath</span>
+    <span><i data-ic="area" data-size="16"></i>14,000 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Ridge House to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--slab ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Ridge House</h3>
+    <span class="prop__price">₹7.2 Cr</span>
+  </div>
+  <p class="prop__loc">Kasauli, Himachal &middot; Cantilevered over a deodar slope</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>3 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>3 bath</span>
+    <span><i data-ic="area" data-size="16"></i>4,800 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Tea Estate Residence to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--light ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Tea Estate Residence</h3>
+    <span class="prop__price">₹6.4 Cr</span>
+  </div>
+  <p class="prop__loc">Coonoor, Nilgiris &middot; Nine acres of working estate</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,100 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bandra Terraces 1801 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--stair ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Bandra Terraces 1801</h3>
+    <span class="prop__price">₹14.2 Cr</span>
+  </div>
+  <p class="prop__loc">Bandra West, Mumbai &middot; Double-height living volume</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>3 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>3 bath</span>
+    <span><i data-ic="area" data-size="16"></i>3,600 sq ft</span>
+  </div>
+</a><a class="prop rv" href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Palm Court Penthouse to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--pool ar-4-3"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Palm Court Penthouse</h3>
+    <span class="prop__price">₹26.8 Cr</span>
+  </div>
+  <p class="prop__loc">Juhu, Mumbai &middot; Rooftop pool and orchard deck</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,900 sq ft</span>
+  </div>
+</a></div>
+        <div class="row gap-4 mt-11" style="justify-content:space-between">
+          <p class="cap">Showing <span class="num">9</span> of <span class="num">41</span></p>
+          <div class="pager">
+            <button aria-label="Previous" disabled><i data-ic="chevL" data-size="16"></i></button>
+            <button aria-current="page">1</button><button>2</button><button>3</button>
+            <span class="muted">…</span><button>5</button>
+            <button aria-label="Next"><i data-ic="chevR" data-size="16"></i></button>
+          </div>
+        </div>
+      </div>
+      <div data-viewpane="list" hidden>
+        <div class="stack gap-8 mt-8"><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Villa Anantara to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--horizon ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Villa Anantara</h3>
+    <span class="prop__price">₹18.4 Cr</span>
+  </div>
+  <p class="prop__loc">Awas Beach, Alibaug &middot; Sea-facing, 1.2-acre plot</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>8,200 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Exclusive</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Malabar Duplex to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--tower ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Malabar Duplex</h3>
+    <span class="prop__price">₹32.0 Cr</span>
+  </div>
+  <p class="prop__loc">Malabar Hill, Mumbai &middot; Two floors, private lift lobby</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,400 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--night ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Skyline Penthouse 4201</h3>
+    <span class="prop__price">₹47.5 Cr</span>
+  </div>
+  <p class="prop__loc">Worli Sea Face, Mumbai &middot; 42nd floor, 270° water views</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>9,100 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Casa Assagao to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--court ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Casa Assagao</h3>
+    <span class="prop__price">₹9.6 Cr</span>
+  </div>
+  <p class="prop__loc">Assagao, North Goa &middot; Restored Portuguese courtyard house</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,300 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Private</span><span class="badge">Bungalow</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bungalow Twelve to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--portal ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Bungalow Twelve</h3>
+    <span class="prop__price">₹92.0 Cr</span>
+  </div>
+  <p class="prop__loc">Prithviraj Road, New Delhi &middot; Lutyens zone, shown on request</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>6 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>7 bath</span>
+    <span><i data-ic="area" data-size="16"></i>14,000 sq ft</span>
+  </div>
+</a></div>
+      </div>
+      <div data-viewpane="map" hidden>
+        <div class="map-split mt-8">
+          <div class="map"><div class="pin" style="left:22%;top:34%"><span class="pin__label">₹18.4 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:46%;top:22%"><span class="pin__label">₹32.0 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:63%;top:48%"><span class="pin__label">₹47.5 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:35%;top:66%"><span class="pin__label">₹9.6 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:78%;top:30%"><span class="pin__label">₹92.0 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:54%;top:74%"><span class="pin__label">₹7.2 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:18%;top:58%"><span class="pin__label">₹6.4 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:70%;top:62%"><span class="pin__label">₹14.2 Cr</span><span class="pin__stem"></span></div><div class="pin" style="left:40%;top:44%"><span class="pin__label">₹26.8 Cr</span><span class="pin__stem"></span></div></div>
+          <div class="map-list"><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Villa Anantara to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--horizon ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Villa Anantara</h3>
+    <span class="prop__price">₹18.4 Cr</span>
+  </div>
+  <p class="prop__loc">Awas Beach, Alibaug &middot; Sea-facing, 1.2-acre plot</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>8,200 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Exclusive</span><span class="badge">Apartment</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Malabar Duplex to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--tower ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">The Malabar Duplex</h3>
+    <span class="prop__price">₹32.0 Cr</span>
+  </div>
+  <p class="prop__loc">Malabar Hill, Mumbai &middot; Two floors, private lift lobby</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>5 bath</span>
+    <span><i data-ic="area" data-size="16"></i>5,400 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--night ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Skyline Penthouse 4201</h3>
+    <span class="prop__price">₹47.5 Cr</span>
+  </div>
+  <p class="prop__loc">Worli Sea Face, Mumbai &middot; 42nd floor, 270° water views</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>5 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>6 bath</span>
+    <span><i data-ic="area" data-size="16"></i>9,100 sq ft</span>
+  </div>
+</a><a class="prop prop--row " href="property.html">
+  <div class="prop__media pf">
+    <div class="prop__tags"><span class="badge">Villa</span></div>
+    <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Casa Assagao to wishlist"><i data-ic="heart" data-size="18"></i></button>
+    <div class="plate plate--court ar-3-2"></div>
+  </div>
+  <div class="prop__head">
+    <h3 class="prop__title">Casa Assagao</h3>
+    <span class="prop__price">₹9.6 Cr</span>
+  </div>
+  <p class="prop__loc">Assagao, North Goa &middot; Restored Portuguese courtyard house</p>
+  <div class="prop__specs">
+    <span><i data-ic="bed" data-size="16"></i>4 bed</span>
+    <span><i data-ic="bath" data-size="16"></i>4 bath</span>
+    <span><i data-ic="area" data-size="16"></i>6,300 sq ft</span>
+  </div>
+</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<button class="fab" aria-label="Open filters" onclick="toast('Filters','Refine by price, size and locality.')"><i data-ic="sliders"></i></button>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <div class="row gap-3"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></div>
+        <p class="lede mt-5" style="max-width:34ch;color:rgba(250,250,247,.66)">Private residential brokerage for architecturally significant homes across India.</p>
+        <form class="mt-6" data-validate data-msg="Subscribed" data-sub="The Atria Journal arrives on the first Thursday of each month." style="max-width:340px">
+          <label class="foot__label" for="nl" style="margin-bottom:8px">The monthly journal</label>
+          <div class="row gap-2">
+            <input class="input" id="nl" type="email" required placeholder="you@email.com" style="background:transparent;border-color:rgba(250,250,247,.28);color:var(--paper)">
+            <button class="btn btn--gold" type="submit" aria-label="Subscribe"><i data-ic="arrow"></i></button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="foot__label">Explore</p>
+        <ul class="stack gap-3">
+          <li><a href="listings.html">The collection</a></li>
+          <li><a href="listings.html#villas">Villas</a></li>
+          <li><a href="listings.html#apartments">Apartments</a></li>
+          <li><a href="listings.html#penthouses">Penthouses</a></li>
+          <li><a href="search.html">Saved searches</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Company</p>
+        <ul class="stack gap-3">
+          <li><a href="about.html">Our house</a></li>
+          <li><a href="agents.html">Advisors</a></li>
+          <li><a href="contact.html">Offices</a></li>
+          <li><a href="contact.html#faq">Questions</a></li>
+          <li><a href="system.html">Design system</a></li>
+          <li><a href="admin.html">Admin console</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <ul class="stack gap-3">
+          <li><a href="tel:+912266550100">+91 22 6655 0100</a></li>
+          <li><a href="mailto:private@atria.house">private@atria.house</a></li>
+          <li><a href="dashboard.html">Client portal</a></li>
+        </ul>
+        <p class="foot__label mt-8">Follow</p>
+        <ul class="stack gap-3">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; 2026 Atria Residential Pvt. Ltd.</span>
+      <span>RERA A52100031204</span>
+      <span class="push"><a href="#">Privacy</a></span>
+      <span><a href="#">Terms</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

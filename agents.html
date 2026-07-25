@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advisors — Atria</title>
+<meta name="description" content="Advisors">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <nav class="nav__links" aria-label="Primary"><a class="nav__link" href="index.html">Residences</a><a class="nav__link" href="listings.html">Collection</a><a class="nav__link" href="agents.html" aria-current="page">Advisors</a><a class="nav__link" href="about.html">House</a><a class="nav__link" href="journal.html">Journal</a><a class="nav__link" href="contact.html">Contact</a></nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="login.html"><i data-ic="user" data-size="18"></i>Account</a>
+      <a class="btn btn--secondary btn--sm" href="booking.html">Book a viewing</a>
+      <button class="nav__burger" aria-label="Open menu"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" role="dialog" aria-label="Menu" aria-modal="true">
+  <div class="row" style="justify-content:space-between">
+    <span class="brand__word">Atria</span>
+    <button class="btn btn--ghost" data-close-drawer aria-label="Close menu"><i data-ic="x"></i></button>
+  </div>
+  <nav class="stack mt-8" style="flex:1"><a href="index.html" data-close-drawer>Residences</a><a href="listings.html" data-close-drawer>Collection</a><a href="agents.html" data-close-drawer>Advisors</a><a href="about.html" data-close-drawer>House</a><a href="journal.html" data-close-drawer>Journal</a><a href="contact.html" data-close-drawer>Contact</a></nav>
+  <a class="btn btn--primary btn--block mt-6" href="booking.html">Book a viewing</a>
+</div>
+<main id="main">
+<style>
+.page-head{padding-top:var(--s-10);padding-bottom:var(--s-8);border-bottom:1px solid var(--hairline)}
+.listing{display:grid;grid-template-columns:280px 1fr;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.listing{grid-template-columns:1fr}}
+.filters{position:sticky;top:104px;display:flex;flex-direction:column;gap:var(--s-6)}
+.filters__grp{border-top:1px solid var(--hairline);padding-top:var(--s-4)}
+.filters__grp h3{font-family:var(--data);font-size:var(--t-mic);letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:var(--s-4)}
+input[type=range]{width:100%;accent-color:#111}
+.map-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);height:78vh}
+.map-split .map{height:100%}
+.map-list{overflow-y:auto;padding-right:var(--s-4);display:flex;flex-direction:column;gap:var(--s-6)}
+@media(max-width:900px){.map-split{grid-template-columns:1fr;height:auto}.map-split .map{height:52vh}}
+.detail{display:grid;grid-template-columns:1fr 380px;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.detail{grid-template-columns:1fr}}
+.amen{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5) var(--s-6)}
+.amen span{display:flex;align-items:center;gap:var(--s-3);font-size:var(--t-b2);padding-block:var(--s-2)}
+.amen i{color:var(--gold-dim)}
+@media(max-width:720px){.amen{grid-template-columns:1fr 1fr}}
+.agent-card{border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)}
+.range-out{display:flex;justify-content:space-between;font-family:var(--data);font-size:var(--t-cap);color:var(--stone)}
+.tl{border-bottom:1px solid var(--hairline)}
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-9)}
+@media(max-width:900px){.lead-grid{grid-template-columns:1fr}}
+</style>
+<div class="wrap page-head">
+  <ol class="crumbs"><li><a href="index.html">Home</a></li><li aria-current="page">Advisors</li></ol>
+  <h1 class="d3 mt-6" style="max-width:20ch">Twenty-eight advisors. One on your file.</h1>
+  <p class="lede mt-5 measure">The advisor who shows you a house negotiates it and closes it. Choose by city, or tell us
+    the brief and we will match you.</p>
+  <div class="row gap-4 mt-8 wrapline">
+    <div class="input-group" style="max-width:320px">
+      <span class="input-group__icon"><i data-ic="search" data-size="18"></i></span>
+      <input class="input" type="search" placeholder="Name or locality" aria-label="Search advisors">
+    </div>
+    <button class="chip is-on">All cities</button><button class="chip">Mumbai</button>
+    <button class="chip">Delhi NCR</button><button class="chip">Goa</button><button class="chip">Hills</button>
+    <label class="sr" for="asort">Sort advisors</label>
+    <select class="select push" id="asort" style="width:200px;height:38px"><option>Highest rated</option><option>Most experience</option><option>Most placed</option></select>
+  </div>
+</div>
+<section class="section">
+  <div class="wrap cols-3"><a class="rv" href="agent.html">
+  <div class="pf"><div class="plate plate--light ar-4-5"></div></div>
+  <div class="row mt-4" style="justify-content:space-between;align-items:baseline">
+    <p class="h3">Ira Sethna</p>
+    <span class="cap row gap-2"><span class="stars"><i data-ic="star" data-size="12"></i></span>4.9</span>
+  </div>
+  <p class="cap">Principal Advisor, Mumbai South</p>
+  <div class="prop__specs"><span><i data-ic="clock" data-size="16"></i>17 yrs</span>
+    <span><i data-ic="rupee" data-size="16"></i>₹1,840 Cr placed</span></div>
+  <p class="cap mt-3">English, Hindi, Gujarati</p>
+</a><a class="rv" href="agent.html">
+  <div class="pf"><div class="plate plate--stair ar-4-5"></div></div>
+  <div class="row mt-4" style="justify-content:space-between;align-items:baseline">
+    <p class="h3">Rehan Kapadia</p>
+    <span class="cap row gap-2"><span class="stars"><i data-ic="star" data-size="12"></i></span>4.8</span>
+  </div>
+  <p class="cap">Director, Alibaug & Coastal</p>
+  <div class="prop__specs"><span><i data-ic="clock" data-size="16"></i>12 yrs</span>
+    <span><i data-ic="rupee" data-size="16"></i>₹960 Cr placed</span></div>
+  <p class="cap mt-3">English, Hindi, Marathi</p>
+</a><a class="rv" href="agent.html">
+  <div class="pf"><div class="plate plate--court ar-4-5"></div></div>
+  <div class="row mt-4" style="justify-content:space-between;align-items:baseline">
+    <p class="h3">Meher Bhatia</p>
+    <span class="cap row gap-2"><span class="stars"><i data-ic="star" data-size="12"></i></span>5.0</span>
+  </div>
+  <p class="cap">Advisor, Goa Portfolio</p>
+  <div class="prop__specs"><span><i data-ic="clock" data-size="16"></i>9 yrs</span>
+    <span><i data-ic="rupee" data-size="16"></i>₹512 Cr placed</span></div>
+  <p class="cap mt-3">English, Hindi, Konkani</p>
+</a><a class="rv" href="agent.html">
+  <div class="pf"><div class="plate plate--portal ar-4-5"></div></div>
+  <div class="row mt-4" style="justify-content:space-between;align-items:baseline">
+    <p class="h3">Nikhil Raghavan</p>
+    <span class="cap row gap-2"><span class="stars"><i data-ic="star" data-size="12"></i></span>4.9</span>
+  </div>
+  <p class="cap">Principal Advisor, Delhi NCR</p>
+  <div class="prop__specs"><span><i data-ic="clock" data-size="16"></i>21 yrs</span>
+    <span><i data-ic="rupee" data-size="16"></i>₹2,410 Cr placed</span></div>
+  <p class="cap mt-3">English, Hindi, Tamil</p>
+</a><a class="rv" href="agent.html">
+  <div class="pf"><div class="plate plate--slab ar-4-5"></div></div>
+  <div class="row mt-4" style="justify-content:space-between;align-items:baseline">
+    <p class="h3">Ananya Varma</p>
+    <span class="cap row gap-2"><span class="stars"><i data-ic="star" data-size="12"></i></span>4.7</span>
+  </div>
+  <p class="cap">Advisor, Hill Estates</p>
+  <div class="prop__specs"><span><i data-ic="clock" data-size="16"></i>7 yrs</span>
+    <span><i data-ic="rupee" data-size="16"></i>₹268 Cr placed</span></div>
+  <p class="cap mt-3">English, Hindi, Punjabi</p>
+</a><a class="rv" href="agent.html">
+  <div class="pf"><div class="plate plate--tower ar-4-5"></div></div>
+  <div class="row mt-4" style="justify-content:space-between;align-items:baseline">
+    <p class="h3">Devan Shroff</p>
+    <span class="cap row gap-2"><span class="stars"><i data-ic="star" data-size="12"></i></span>4.9</span>
+  </div>
+  <p class="cap">Head of Private Sales</p>
+  <div class="prop__specs"><span><i data-ic="clock" data-size="16"></i>24 yrs</span>
+    <span><i data-ic="rupee" data-size="16"></i>₹3,120 Cr placed</span></div>
+  <p class="cap mt-3">English, Gujarati, French</p>
+</a></div>
+</section>
+<section class="section--tight dark">
+  <div class="wrap row wrapline gap-6" style="justify-content:space-between;align-items:center">
+    <div><h2 class="d3" style="max-width:20ch">Not sure who to ask for?</h2>
+      <p class="lede mt-4 measure-s">Send us the brief. We will put one advisor on it within a day.</p></div>
+    <a class="btn btn--primary" href="contact.html">Send a brief</a>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <div class="row gap-3"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></div>
+        <p class="lede mt-5" style="max-width:34ch;color:rgba(250,250,247,.66)">Private residential brokerage for architecturally significant homes across India.</p>
+        <form class="mt-6" data-validate data-msg="Subscribed" data-sub="The Atria Journal arrives on the first Thursday of each month." style="max-width:340px">
+          <label class="foot__label" for="nl" style="margin-bottom:8px">The monthly journal</label>
+          <div class="row gap-2">
+            <input class="input" id="nl" type="email" required placeholder="you@email.com" style="background:transparent;border-color:rgba(250,250,247,.28);color:var(--paper)">
+            <button class="btn btn--gold" type="submit" aria-label="Subscribe"><i data-ic="arrow"></i></button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="foot__label">Explore</p>
+        <ul class="stack gap-3">
+          <li><a href="listings.html">The collection</a></li>
+          <li><a href="listings.html#villas">Villas</a></li>
+          <li><a href="listings.html#apartments">Apartments</a></li>
+          <li><a href="listings.html#penthouses">Penthouses</a></li>
+          <li><a href="search.html">Saved searches</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Company</p>
+        <ul class="stack gap-3">
+          <li><a href="about.html">Our house</a></li>
+          <li><a href="agents.html">Advisors</a></li>
+          <li><a href="contact.html">Offices</a></li>
+          <li><a href="contact.html#faq">Questions</a></li>
+          <li><a href="system.html">Design system</a></li>
+          <li><a href="admin.html">Admin console</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <ul class="stack gap-3">
+          <li><a href="tel:+912266550100">+91 22 6655 0100</a></li>
+          <li><a href="mailto:private@atria.house">private@atria.house</a></li>
+          <li><a href="dashboard.html">Client portal</a></li>
+        </ul>
+        <p class="foot__label mt-8">Follow</p>
+        <ul class="stack gap-3">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; 2026 Atria Residential Pvt. Ltd.</span>
+      <span>RERA A52100031204</span>
+      <span class="push"><a href="#">Privacy</a></span>
+      <span><a href="#">Terms</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

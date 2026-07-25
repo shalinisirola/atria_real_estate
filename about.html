@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our house — Atria</title>
+<meta name="description" content="Our house">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@300,400,500,600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html" aria-label="Atria, home"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></a>
+    <nav class="nav__links" aria-label="Primary"><a class="nav__link" href="index.html">Residences</a><a class="nav__link" href="listings.html">Collection</a><a class="nav__link" href="agents.html">Advisors</a><a class="nav__link" href="about.html" aria-current="page">House</a><a class="nav__link" href="journal.html">Journal</a><a class="nav__link" href="contact.html">Contact</a></nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="login.html"><i data-ic="user" data-size="18"></i>Account</a>
+      <a class="btn btn--secondary btn--sm" href="booking.html">Book a viewing</a>
+      <button class="nav__burger" aria-label="Open menu"><i data-ic="menu"></i></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" role="dialog" aria-label="Menu" aria-modal="true">
+  <div class="row" style="justify-content:space-between">
+    <span class="brand__word">Atria</span>
+    <button class="btn btn--ghost" data-close-drawer aria-label="Close menu"><i data-ic="x"></i></button>
+  </div>
+  <nav class="stack mt-8" style="flex:1"><a href="index.html" data-close-drawer>Residences</a><a href="listings.html" data-close-drawer>Collection</a><a href="agents.html" data-close-drawer>Advisors</a><a href="about.html" data-close-drawer>House</a><a href="journal.html" data-close-drawer>Journal</a><a href="contact.html" data-close-drawer>Contact</a></nav>
+  <a class="btn btn--primary btn--block mt-6" href="booking.html">Book a viewing</a>
+</div>
+<main id="main">
+<style>
+.page-head{padding-top:var(--s-10);padding-bottom:var(--s-8);border-bottom:1px solid var(--hairline)}
+.listing{display:grid;grid-template-columns:280px 1fr;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.listing{grid-template-columns:1fr}}
+.filters{position:sticky;top:104px;display:flex;flex-direction:column;gap:var(--s-6)}
+.filters__grp{border-top:1px solid var(--hairline);padding-top:var(--s-4)}
+.filters__grp h3{font-family:var(--data);font-size:var(--t-mic);letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:var(--s-4)}
+input[type=range]{width:100%;accent-color:#111}
+.map-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);height:78vh}
+.map-split .map{height:100%}
+.map-list{overflow-y:auto;padding-right:var(--s-4);display:flex;flex-direction:column;gap:var(--s-6)}
+@media(max-width:900px){.map-split{grid-template-columns:1fr;height:auto}.map-split .map{height:52vh}}
+.detail{display:grid;grid-template-columns:1fr 380px;gap:var(--s-9);align-items:start}
+@media(max-width:1000px){.detail{grid-template-columns:1fr}}
+.amen{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5) var(--s-6)}
+.amen span{display:flex;align-items:center;gap:var(--s-3);font-size:var(--t-b2);padding-block:var(--s-2)}
+.amen i{color:var(--gold-dim)}
+@media(max-width:720px){.amen{grid-template-columns:1fr 1fr}}
+.agent-card{border:1px solid var(--hairline);background:var(--white);padding:var(--s-6)}
+.range-out{display:flex;justify-content:space-between;font-family:var(--data);font-size:var(--t-cap);color:var(--stone)}
+.tl{border-bottom:1px solid var(--hairline)}
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-9)}
+@media(max-width:900px){.lead-grid{grid-template-columns:1fr}}
+</style>
+<section class="section dark">
+  <div class="wrap">
+    <span class="eyebrow">Our house</span>
+    <h1 class="d1 mt-6" style="max-width:18ch">Twenty-nine years of taking instructions from owners, not builders.</h1>
+    <p class="lede mt-8 measure">Atria is a private brokerage. We do not develop, we do not resell inventory, and we do
+      not take a developer's marketing fee. Our only income is the fee our client agrees to.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap lead-grid">
+    <div>
+      <span class="eyebrow">The story</span>
+      <h2 class="d3 mt-5">It started with a disputed carpet area.</h2>
+      <p class="mt-6 ink60 measure">In 2004 a client bought a Worli apartment sold as 4,200 sq ft. It measured 3,690.
+        The developer pointed at a clause. We paid the difference out of our own fee and changed how we work: from that
+        month, no residence goes on our books until one of us has measured it.</p>
+      <p class="mt-5 ink60 measure">That is the whole idea. Every number on this site is one we took ourselves, and
+        every drawing is one you can hold against the wall.</p>
+    </div>
+    <div class="pf"><div class="plate plate--stair ar-4-5"></div>
+      <div class="dimline mt-4"><span class="mono-label">Measured</span><span class="dimline__bar"></span><span class="mono-label num">41 / 41</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight" style="background:var(--paper-warm)">
+  <div class="wrap cols-2" style="gap:var(--s-11)">
+    <div><span class="eyebrow">Mission</span>
+      <p class="quote mt-5">To make the buying of a significant home as well documented as the building of one.</p></div>
+    <div><span class="eyebrow">Vision</span>
+      <p class="quote mt-5">A market where the floor plan arrives before the sales pitch, and the measurements are never in question.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">Timeline</span>
+    <h2 class="d3 mt-4">How we got here</h2>
+    <div class="tl mt-9"><div class="tl__item"><span class="tl__yr num">1997</span><div><p class="h3">Two rooms on Wodehouse Road</p><p class="b2 ink60 mt-2 measure">Devan Shroff leaves a developer's sales desk and starts taking instructions directly from owners.</p></div></div><div class="tl__item"><span class="tl__yr num">2004</span><div><p class="h3">The measuring rule</p><p class="b2 ink60 mt-2 measure">After a disputed carpet area costs a client ₹40 lakh, we start surveying every home ourselves.</p></div></div><div class="tl__item"><span class="tl__yr num">2011</span><div><p class="h3">Alibaug</p><p class="b2 ink60 mt-2 measure">The coastal office opens with four villas. It is now our second largest book.</p></div></div><div class="tl__item"><span class="tl__yr num">2017</span><div><p class="h3">Goa and the hills</p><p class="b2 ink60 mt-2 measure">Assagao, Siolim, Kasauli and Coonoor added as the second-home market turns serious.</p></div></div><div class="tl__item"><span class="tl__yr num">2022</span><div><p class="h3">The client portal</p><p class="b2 ink60 mt-2 measure">Title documents, drawings and viewing notes move online. No more couriered folders.</p></div></div><div class="tl__item"><span class="tl__yr num">2026</span><div><p class="h3">Forty-one residences</p><p class="b2 ink60 mt-2 measure">Twenty-eight advisors across six cities. Still four new instructions a month.</p></div></div></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">Leadership</span>
+    <h2 class="d3 mt-4">Four people you will actually meet</h2>
+    <div class="cols-4 mt-9"><a class="rv" href="agent.html"><div class="pf"><div class="plate plate--tower ar-4-5"></div></div><p class="h3 mt-4">Devan Shroff</p><p class="cap">Founder</p></a><a class="rv" href="agent.html"><div class="pf"><div class="plate plate--light ar-4-5"></div></div><p class="h3 mt-4">Ira Sethna</p><p class="cap">Principal, Mumbai</p></a><a class="rv" href="agent.html"><div class="pf"><div class="plate plate--portal ar-4-5"></div></div><p class="h3 mt-4">Nikhil Raghavan</p><p class="cap">Principal, Delhi</p></a><a class="rv" href="agent.html"><div class="pf"><div class="plate plate--court ar-4-5"></div></div><p class="h3 mt-4">Meher Bhatia</p><p class="cap">Head of Goa</p></a></div>
+    <a class="btn btn--secondary mt-9" href="agents.html">All 28 advisors</a>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <span class="eyebrow">Recognition</span>
+    <div class="cols-4 mt-8">
+      <div><p class="stat__k num">2025</p><p class="stat__l">Boutique brokerage of the year</p></div>
+      <div><p class="stat__k num">4.9</p><p class="stat__l">Average advisor rating</p></div>
+      <div><p class="stat__k num">96%</p><p class="stat__l">Clients who would refer us</p></div>
+      <div><p class="stat__k num">0</p><p class="stat__l">RERA complaints, all time</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <div class="row gap-3"><svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M2 21 12 3l10 18" stroke="currentColor" stroke-width="1.1"/>
+<path d="M7.4 21 12 12.6 16.6 21" stroke="#C8A96A" stroke-width="1.1"/></svg><span class="brand__word">Atria</span></div>
+        <p class="lede mt-5" style="max-width:34ch;color:rgba(250,250,247,.66)">Private residential brokerage for architecturally significant homes across India.</p>
+        <form class="mt-6" data-validate data-msg="Subscribed" data-sub="The Atria Journal arrives on the first Thursday of each month." style="max-width:340px">
+          <label class="foot__label" for="nl" style="margin-bottom:8px">The monthly journal</label>
+          <div class="row gap-2">
+            <input class="input" id="nl" type="email" required placeholder="you@email.com" style="background:transparent;border-color:rgba(250,250,247,.28);color:var(--paper)">
+            <button class="btn btn--gold" type="submit" aria-label="Subscribe"><i data-ic="arrow"></i></button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="foot__label">Explore</p>
+        <ul class="stack gap-3">
+          <li><a href="listings.html">The collection</a></li>
+          <li><a href="listings.html#villas">Villas</a></li>
+          <li><a href="listings.html#apartments">Apartments</a></li>
+          <li><a href="listings.html#penthouses">Penthouses</a></li>
+          <li><a href="search.html">Saved searches</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Company</p>
+        <ul class="stack gap-3">
+          <li><a href="about.html">Our house</a></li>
+          <li><a href="agents.html">Advisors</a></li>
+          <li><a href="contact.html">Offices</a></li>
+          <li><a href="contact.html#faq">Questions</a></li>
+          <li><a href="system.html">Design system</a></li>
+          <li><a href="admin.html">Admin console</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <ul class="stack gap-3">
+          <li><a href="tel:+912266550100">+91 22 6655 0100</a></li>
+          <li><a href="mailto:private@atria.house">private@atria.house</a></li>
+          <li><a href="dashboard.html">Client portal</a></li>
+        </ul>
+        <p class="foot__label mt-8">Follow</p>
+        <ul class="stack gap-3">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; 2026 Atria Residential Pvt. Ltd.</span>
+      <span>RERA A52100031204</span>
+      <span class="push"><a href="#">Privacy</a></span>
+      <span><a href="#">Terms</a></span>
+      <span><a href="#">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="assets/app.js"></script>
+
+</body>
+</html>
