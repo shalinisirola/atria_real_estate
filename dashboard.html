@@ -12,9 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
-<style>
-/* tokens */
-/* ============================================================
+<style>/* ============================================================
    ATRIA — Design Tokens
    Luxury residential brokerage. Architectural editorial system.
    ============================================================ */
@@ -46,9 +44,9 @@
   --body:    "General Sans", "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --data:    "Inter", "General Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --t-d1: clamp(3.25rem, 7.2vw, 6.5rem);   /* 104 */
-  --t-d2: clamp(2.75rem, 5.2vw, 4.5rem);   /*  72 */
-  --t-d3: clamp(2.25rem, 3.6vw, 3.25rem);  /*  52 */
+  --t-d1: clamp(3.5rem, 8vw, 7.5rem);      /* 120 */
+  --t-d2: clamp(2.9rem, 5.8vw, 5.25rem);   /*  84 */
+  --t-d3: clamp(2.4rem, 4vw, 3.5rem);      /*  56 */
   --t-h1: 2.5rem;    /* 40 */
   --t-h2: 1.75rem;   /* 28 */
   --t-h3: 1.375rem;  /* 22 */
@@ -193,7 +191,6 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
 
-/* components */
 /* ============================================================
    ATRIA — Components
    ============================================================ */
@@ -447,7 +444,28 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
   transition:transform var(--slow) var(--ease),filter var(--slow) var(--ease);
   transform-origin:center;
 }
-.prop:hover .prop__media .plate{transform:scale(1.035)}
+.prop:hover .prop__media .plate{transform:scale(1.055)}
+.prop__media{transition:box-shadow var(--mid) var(--ease),transform var(--mid) var(--ease)}
+.prop:hover .prop__media{box-shadow:0 30px 60px -34px rgba(17,17,17,.5);transform:translateY(-4px)}
+.prop__veil{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:linear-gradient(0deg,rgba(13,13,12,.72) 0%,rgba(13,13,12,.12) 46%,transparent 72%);
+  transition:opacity var(--mid) var(--ease)}
+.prop:hover .prop__veil{opacity:1}
+.prop__cta{position:absolute;left:var(--s-5);bottom:var(--s-5);z-index:3;pointer-events:none;
+  display:inline-flex;align-items:center;gap:var(--s-3);color:var(--paper);
+  font-family:var(--data);font-size:var(--t-mic);font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  opacity:0;transform:translateY(10px);transition:opacity var(--mid) var(--ease),transform var(--mid) var(--ease)}
+.prop__cta::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform var(--slow) var(--ease) 120ms}
+.prop:hover .prop__cta{opacity:1;transform:none}
+.prop:hover .prop__cta::after{transform:scaleX(1)}
+.prop__cta svg{transition:transform var(--mid) var(--ease)}
+.prop:hover .prop__cta svg{transform:translateX(4px)}
+.prop__price{transition:color var(--fast) var(--ease)}
+.prop:hover .prop__price{color:var(--gold-dim)}
+.prop:hover .prop__title{color:var(--ink)}
+.btn svg{transition:transform var(--mid) var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
 .prop__tags{position:absolute;left:var(--s-4);top:var(--s-4);display:flex;gap:var(--s-2);z-index:2}
 .prop__fav{
   position:absolute;right:var(--s-4);top:var(--s-4);z-index:2;width:40px;height:40px;
@@ -841,7 +859,6 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
 @media(max-width:560px){.cols-4{grid-template-columns:1fr}}
 .sticky-col{position:sticky;top:110px}
 @media(max-width:900px){.sticky-col{position:static}}
-
 </style>
 
 </head>
@@ -909,7 +926,7 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
       <button class="btn btn--ghost btn--sm" data-nav="appts">All appointments</button></div>
     <div class="card mt-5">
       <div class="row gap-5">
-        <div class="pf" style="width:120px;flex:none"><div class="plate plate--night ar-1-1"><img src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Low-angle view of a glass residential tower at dusk" loading="lazy" decoding="async"></div></div>
+        <div class="pf" style="width:120px;flex:none"><div class="plate plate--night ar-1-1"><img src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Low-angle view of a glass residential tower" loading="lazy" decoding="async"></div></div>
         <div>
           <p class="badge badge--gold">Confirmed</p>
           <p class="h3 mt-3">Skyline Penthouse 4201</p>
@@ -964,7 +981,9 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
   <div class="prop__media pf">
     <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
-    <div class="plate plate--night ar-4-3"><img src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Low-angle view of a glass residential tower at dusk" loading="lazy" decoding="async"></div>
+    <div class="plate plate--night ar-4-3"><img src="https://images.pexels.com/photos/33528643/pexels-photo-33528643.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/33528643/pexels-photo-33528643.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/33528643/pexels-photo-33528643.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/33528643/pexels-photo-33528643.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Close-up of a glazed residential facade" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Skyline Penthouse 4201</h3>
@@ -981,6 +1000,8 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     <div class="prop__tags"><span class="badge badge--ink">Exclusive</span><span class="badge">Apartment</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Malabar Duplex to wishlist"><i data-ic="heart" data-size="18"></i></button>
     <div class="plate plate--tower ar-4-3"><img src="https://images.pexels.com/photos/30506378/pexels-photo-30506378.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/30506378/pexels-photo-30506378.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/30506378/pexels-photo-30506378.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/30506378/pexels-photo-30506378.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Contemporary high-rise apartment tower with clean vertical lines" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">The Malabar Duplex</h3>
@@ -997,6 +1018,8 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Villa</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Villa Anantara to wishlist"><i data-ic="heart" data-size="18"></i></button>
     <div class="plate plate--horizon ar-4-3"><img src="https://images.pexels.com/photos/37125479/pexels-photo-37125479.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/37125479/pexels-photo-37125479.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/37125479/pexels-photo-37125479.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/37125479/pexels-photo-37125479.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Modern coastal residence with glass balconies beside dunes" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Villa Anantara</h3>
@@ -1015,6 +1038,8 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     <div class="prop__tags"><span class="badge badge--ink">New</span><span class="badge">Apartment</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bandra Terraces 1801 to wishlist"><i data-ic="heart" data-size="18"></i></button>
     <div class="plate plate--stair ar-4-3"><img src="https://images.pexels.com/photos/16110999/pexels-photo-16110999.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/16110999/pexels-photo-16110999.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/16110999/pexels-photo-16110999.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/16110999/pexels-photo-16110999.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Glass balconies stacked across a modern facade" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Bandra Terraces 1801</h3>
@@ -1031,6 +1056,8 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     <div class="prop__tags"><span class="badge">Penthouse</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Palm Court Penthouse to wishlist"><i data-ic="heart" data-size="18"></i></button>
     <div class="plate plate--pool ar-4-3"><img src="https://images.pexels.com/photos/2771935/pexels-photo-2771935.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/2771935/pexels-photo-2771935.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/2771935/pexels-photo-2771935.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/2771935/pexels-photo-2771935.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Whitewashed residence framed by palm trees" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Palm Court Penthouse</h3>
@@ -1047,6 +1074,8 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     <div class="prop__tags"><span class="badge">Villa</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Casa Assagao to wishlist"><i data-ic="heart" data-size="18"></i></button>
     <div class="plate plate--court ar-4-3"><img src="https://images.pexels.com/photos/31656168/pexels-photo-31656168.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/31656168/pexels-photo-31656168.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/31656168/pexels-photo-31656168.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/31656168/pexels-photo-31656168.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Apartment courtyard with landscaped planting and balconies" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Casa Assagao</h3>
@@ -1062,7 +1091,9 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
   <div class="prop__media pf">
     <div class="prop__tags"><span class="badge">Villa</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save The Ridge House to wishlist"><i data-ic="heart" data-size="18"></i></button>
-    <div class="plate plate--slab ar-4-3"><img src="https://images.pexels.com/photos/27307398/pexels-photo-27307398.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/27307398/pexels-photo-27307398.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/27307398/pexels-photo-27307398.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/27307398/pexels-photo-27307398.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Modern residence set behind a lawn" loading="lazy" decoding="async"></div>
+    <div class="plate plate--slab ar-4-3"><img src="https://images.pexels.com/photos/36289821/pexels-photo-36289821.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/36289821/pexels-photo-36289821.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/36289821/pexels-photo-36289821.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/36289821/pexels-photo-36289821.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Contemporary residence with a sculpted facade" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">The Ridge House</h3>
@@ -1080,7 +1111,9 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
   <div class="prop__media pf">
     <div class="prop__tags"><span class="badge badge--ink">Signature</span><span class="badge">Penthouse</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Skyline Penthouse 4201 to wishlist"><i data-ic="heart" data-size="18"></i></button>
-    <div class="plate plate--night ar-3-2"><img src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Low-angle view of a glass residential tower at dusk" loading="lazy" decoding="async"></div>
+    <div class="plate plate--night ar-3-2"><img src="https://images.pexels.com/photos/18517205/pexels-photo-18517205.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/18517205/pexels-photo-18517205.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/18517205/pexels-photo-18517205.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/18517205/pexels-photo-18517205.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Sleek high-rise with a deep glass facade and balconies" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Skyline Penthouse 4201</h3>
@@ -1097,6 +1130,8 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     <div class="prop__tags"><span class="badge badge--ink">Private</span><span class="badge">Bungalow</span></div>
     <button class="prop__fav" type="button" aria-pressed="false" aria-label="Save Bungalow Twelve to wishlist"><i data-ic="heart" data-size="18"></i></button>
     <div class="plate plate--portal ar-3-2"><img src="https://images.pexels.com/photos/1693946/pexels-photo-1693946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1693946/pexels-photo-1693946.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1693946/pexels-photo-1693946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1693946/pexels-photo-1693946.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="White low-rise residence with deep balconies" loading="lazy" decoding="async"></div>
+    <span class="prop__veil"></span>
+    <span class="prop__cta">View residence <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11.5 5.5 16 10l-4.5 4.5"/></svg></span>
   </div>
   <div class="prop__head">
     <h3 class="prop__title">Bungalow Twelve</h3>
@@ -1124,7 +1159,7 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
   </div>
   <div class="tabpanel mt-8" id="ap-up" role="tabpanel" aria-labelledby="apt-up">
     <div class="card row gap-5 wrapline">
-      <div class="pf" style="width:140px;flex:none"><div class="plate plate--night ar-1-1"><img src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Low-angle view of a glass residential tower at dusk" loading="lazy" decoding="async"></div></div>
+      <div class="pf" style="width:140px;flex:none"><div class="plate plate--night ar-1-1"><img src="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop" srcset="https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=640&h=480&fit=crop 640w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop 1200w, https://images.pexels.com/photos/1662159/pexels-photo-1662159.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1350&fit=crop 1800w" sizes="(max-width:720px) 100vw, 45vw" alt="Low-angle view of a glass residential tower" loading="lazy" decoding="async"></div></div>
       <div><span class="badge badge--gold badge--dot">Confirmed</span>
         <p class="h3 mt-3">Skyline Penthouse 4201</p>
         <p class="cap mt-2">Thursday 30 July 2026, 10:00–10:45 · Worli Sea Face</p>
@@ -1401,8 +1436,7 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
 </main>
 
 <div class="toasts" aria-live="polite" aria-atomic="false"></div>
-<script>
-/* ============================================================
+<script>/* ============================================================
    ATRIA — behaviour layer
    ============================================================ */
 (function () {
@@ -1806,6 +1840,30 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
       setTimeout(function () { b.style.height = h; }, 200);
     });
 
+    /* count-up statistics */
+    var counters = document.querySelectorAll("[data-count]");
+    if (counters.length) {
+      var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+      var fmt = function (n, p) { return (p || "") + n.toLocaleString("en-IN"); };
+      var run = function (el) {
+        var target = +el.dataset.count, pre = el.dataset.prefix || "", t0 = null, dur = 1400;
+        if (reduce) { el.textContent = fmt(target, pre); return; }
+        var tick = function (t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(Math.round(target * e), pre);
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      if ("IntersectionObserver" in window) {
+        var co = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { run(e.target); co.unobserve(e.target); } });
+        }, { threshold: 0.4 });
+        counters.forEach(function (el) { co.observe(el); });
+      } else { counters.forEach(run); }
+    }
+
     /* map pin ↔ card sync */
     document.querySelectorAll(".pin").forEach(function (p) {
       p.addEventListener("mouseenter", function () {
@@ -1814,7 +1872,6 @@ hr{border:0;border-top:1px solid var(--hairline);margin:0}
     });
   });
 })();
-
 </script>
 
 </body>
